@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="ECD Check: annular pressure loss and ECD screening, API RP 13D (1995) power-law annulus model. Runs in your browser.">
+<title>ECD Check</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700&family=Noto+Sans:wght@400;600&family=Spline+Sans+Mono:wght@400;600&display=swap">
+<style>
+/* Field Tools v3, No. 04 ECD Check: the mud check report on the lab bench; at night, the viscometer's lit dial in the lab trailer. */
+:root {
+  --bg: #d6d1b8; --surface: #f3f0e2; --surface-2: #e7e2cc; --hair: #cbc4a6; --line: #6e6a55;
+  --fg: #1d1c14; --muted: #4a4733; --accent: #4e4010; --accent-ink: #ffffff; --mark: #b4231f;
+  --good: #1e6633; --warn: #8a5000; --bad: #a0161a; --field: #fbfaf3;
+  --chart-1: #4e4010; --chart-2: #b4231f; --chart-3: #1d1c14; --chart-4: #2c6a8a; --chart-grid: #d8d2b8;
+  --band: #f0dba8; --band-edge: #8a5000;
+  --display: "Saira Condensed", "Bahnschrift Condensed", "Arial Narrow", "Liberation Sans Narrow", sans-serif;
+  --body: "Noto Sans", "Segoe UI", Verdana, "DejaVu Sans", system-ui, sans-serif;
+  --mono: "Spline Sans Mono", ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #131410; --surface: #1c1d18; --surface-2: #25261f; --hair: #34362d; --line: #80836f;
+  --fg: #ecebe2; --muted: #b6b6a8; --accent: #cfd67e; --accent-ink: #1a1c06; --mark: #ff7d6e;
+  --good: #7fd394; --warn: #ffad66; --bad: #ff9aa2; --field: #10110d;
+  --chart-1: #cfd67e; --chart-2: #ff7d6e; --chart-3: #ecebe2; --chart-4: #7fc4e6; --chart-grid: #30322a;
+  --band: #3a2d10; --band-edge: #ffad66;
+  --display: "Saira Condensed", "Bahnschrift Condensed", "Arial Narrow", "Liberation Sans Narrow", sans-serif;
+  --body: "Noto Sans", "Segoe UI", Verdana, "DejaVu Sans", system-ui, sans-serif;
+  --mono: "Spline Sans Mono", ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #131410; --surface: #1c1d18; --surface-2: #25261f; --hair: #34362d; --line: #80836f;
+  --fg: #ecebe2; --muted: #b6b6a8; --accent: #cfd67e; --accent-ink: #1a1c06; --mark: #ff7d6e;
+  --good: #7fd394; --warn: #ffad66; --bad: #ff9aa2; --field: #10110d;
+  --chart-1: #cfd67e; --chart-2: #ff7d6e; --chart-3: #ecebe2; --chart-4: #7fc4e6; --chart-grid: #30322a;
+  --band: #3a2d10; --band-edge: #ffad66;
+  --display: "Saira Condensed", "Bahnschrift Condensed", "Arial Narrow", "Liberation Sans Narrow", sans-serif;
+  --body: "Noto Sans", "Segoe UI", Verdana, "DejaVu Sans", system-ui, sans-serif;
+  --mono: "Spline Sans Mono", ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  color-scheme: dark; }
+/* --band is the transitional-flow wash, --band-edge its rule. Both pass 3:1 (edge on field, band and surface; every chart mark on band) and --fg and --warn pass 4.5:1 on band, light and dark. */
+
+* { box-sizing: border-box; }
+[hidden], .hidden { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; color: var(--fg); background: var(--bg); font-family: var(--body); font-size: 16px; line-height: 1.5; }
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 16px 40px;
+}
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* Header: the lab report header line, then the tool name with a short olive rule. No box; the sheet is the box. */
+.sheet-head { margin-bottom: 16px; }
+.lab { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0 0 10px; padding: 0 0 6px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; color: var(--muted); }
+.lab b { color: var(--fg); font-weight: 600; letter-spacing: 0; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 7vw, 3.2rem); line-height: 1; letter-spacing: .01em; margin: 0 0 10px; color: var(--fg); }
+h1::after { content: ""; display: block; width: 56px; height: 4px; background: var(--accent); margin-top: 6px; }
+.lede { margin: 0; color: var(--muted); max-width: 66ch; }
+h2, h3, summary { font-family: var(--display); font-weight: 700; letter-spacing: .02em; line-height: 1.1; }
+h2 { font-size: 1.5rem; margin: 0 0 12px; }
+h3 { font-size: 1.15rem; margin: 18px 0 8px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.screen-note { margin: 14px 0 0; max-width: 78ch; color: var(--fg); background: var(--surface-2); border-top: 2px solid var(--warn); border-bottom: 1px solid var(--hair); padding: 8px 12px; }
+
+/* Panels: ruled property blocks of the report form, rules top and bottom only. */
+.panel { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 14px 12px 16px; margin-bottom: 14px; min-width: 0; }
+@media (min-width: 700px) { .panel { padding: 16px 18px 20px; } }
+.panel-head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--hair); }
+.panel-head h2 { margin: 0; }
+
+/* Fields */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px 14px; }
+.field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.field label, .lbl, legend { font-family: var(--display); font-weight: 500; font-size: 17px; letter-spacing: .02em; line-height: 1.2; color: var(--fg); }
+.hint { font-size: 14px; color: var(--muted); margin: 0; }
+textarea, input[type="number"], input[type="text"], input[type="date"], select {
+  font: inherit; font-size: 16px; color: var(--fg); background: var(--field);
+  border: 1px solid var(--line); border-radius: 3px; padding: 9px 10px; min-height: 44px; min-width: 0; width: 100%;
+}
+input[type="number"], input[type="text"] { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+textarea { font-family: var(--mono); font-size: 14px; line-height: 1.45; resize: vertical; }
+::placeholder { color: var(--muted); opacity: 1; }
+
+/* Signature detail: the six-speed readings sit as a strip of small dial faces. */
+#fann-box .field label { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-weight: 600; font-size: 15px; letter-spacing: 0; }
+#fann-box .field label::before {
+  content: ""; flex: none; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--line);
+  background: conic-gradient(from 38deg, var(--accent) 0 12deg, var(--field) 12deg 360deg);
+}
+
+/* Buttons */
+button, .filebtn {
+  font: inherit; font-size: 15px; font-weight: 600; line-height: 1.2; border-radius: 3px; padding: 11px 16px; min-height: 44px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--field); color: var(--fg);
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+}
+button:hover, .filebtn:hover { background: var(--surface-2); }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+button.primary:hover { background: var(--accent); filter: brightness(1.1); }
+button.icon { min-width: 44px; padding: 0 12px; font-family: var(--mono); }
+.btn-row, .row-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.row-actions { margin-top: 12px; }
+.file-label { font-family: var(--display); font-weight: 500; font-size: 17px; letter-spacing: .02em; }
+input[type=file] { font: inherit; font-size: 14px; max-width: 100%; color: var(--muted); }
+input[type=file]::file-selector-button { font: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 16px; margin-right: 10px; border: 1px solid var(--line); border-radius: 3px; background: var(--field); color: var(--fg); cursor: pointer; }
+
+/* Segmented control */
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; max-width: 100%; }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg label { min-height: 44px; min-width: 56px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-family: var(--display); font-weight: 500; font-size: 17px; letter-spacing: .02em; color: var(--muted); background: var(--field); }
+.seg label + input + label { border-left: 1px solid var(--line); }
+.seg input:checked + label { background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.seg input:focus-visible + label { outline: 3px solid var(--accent); outline-offset: -5px; box-shadow: inset 0 0 0 5px var(--field); }
+
+/* Status: a remark line on the report. */
+.status { font-family: var(--mono); font-size: 14px; margin: 0 0 12px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 3px; background: var(--field); color: var(--muted); }
+.status:empty { display: none; }
+.status.good { color: var(--good); border-color: var(--good); }
+.status.warn { color: var(--warn); border-color: var(--warn); }
+.status.bad { color: var(--bad); border-color: var(--bad); border-width: 2px; }
+.tag { display: inline-block; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--warn); border: 1px solid var(--warn); border-radius: 3px; padding: 1px 7px; }
+.tag.plain { color: var(--muted); border-color: var(--line); font-weight: 400; }
+
+/* Readouts. The key answer is read off a gauge: one --mark needle, figure under the hub. */
+.chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0; margin-bottom: 14px; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.chip { padding: 10px 14px; min-width: 0; border-bottom: 1px solid var(--hair); }
+.chip .k { font-family: var(--display); font-weight: 500; font-size: 15px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.chip .v { font-family: var(--mono); font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.chip .v .u { font-weight: 400; color: var(--muted); font-size: 15px; margin-left: 4px; }
+.chip.mark { grid-column: 1 / -1; text-align: center; padding: 12px 12px 14px; background: var(--field); border: 1px solid var(--line); border-radius: 3px; margin: 10px 0; }
+.chip.mark svg { display: block; width: 220px; max-width: 100%; height: auto; margin: 0 auto 2px; }
+.chip.mark .k { font-size: 16px; color: var(--fg); }
+.chip.mark .v { font-size: 30px; line-height: 1.2; }
+.chip.mark .v .u { font-size: 18px; }
+.gauge .arc { fill: none; stroke: var(--line); stroke-width: 2; }
+.gauge .tick { stroke: var(--accent); stroke-width: 1.5; }
+.gauge .tick.major { stroke-width: 2.5; }
+.gauge .scale { font-family: var(--mono); font-size: 10px; fill: var(--muted); }
+.gauge .needle { stroke: var(--mark); stroke-width: 3.5; stroke-linecap: round; }
+.gauge .hub { fill: var(--fg); }
+@media (min-width: 760px) {
+  .chips { grid-template-columns: minmax(260px, 1.1fr) repeat(3, minmax(0, 1fr)); align-items: stretch; }
+  .chip { border-bottom: 0; border-left: 1px solid var(--hair); display: flex; flex-direction: column; justify-content: center; }
+  .chip.mark { grid-column: auto; margin: 10px 4px 10px 0; border-left: 1px solid var(--line); }
+  .chip.mark + .chip { border-left: 0; }
+}
+
+/* Tables: ruled property rows. */
+.scroll { overflow: auto; max-height: 520px; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+table { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 6px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--hair); }
+th { position: sticky; top: 0; z-index: 1; background: var(--surface-2); font-family: var(--display); font-weight: 500; font-size: 15px; letter-spacing: .03em; color: var(--fg); border-bottom: 2px solid var(--accent); }
+th small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+td.na { color: var(--muted); }
+.sec-table th, .sec-table td, .res-table th, .res-table td { text-align: left; vertical-align: middle; }
+.sec-table th.num, .sec-table td.num, .res-table th.num, .res-table td.num { text-align: right; }
+.sec-table td { padding: 5px 6px; }
+.sec-table input { min-width: 84px; }
+.sec-table td:first-child input { min-width: 260px; font-family: var(--body); text-align: left; }
+.res-table td:first-child { min-width: 170px; font-family: var(--body); }
+tfoot td { font-weight: 600; border-bottom: 0; border-top: 2px solid var(--accent); background: var(--surface-2); }
+.regime { display: inline-block; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border: 1px solid currentColor; border-radius: 3px; padding: 0 6px; white-space: nowrap; }
+.regime.laminar { color: var(--good); }
+.regime.transitional { color: var(--warn); background: var(--band); border: 2px solid var(--band-edge); }
+.regime.turbulent { color: var(--bad); }
+.regime.noflow { color: var(--muted); }
+#results > .chips { margin-bottom: 14px; }
+.notes { margin: 10px 0 0; padding-left: 18px; color: var(--muted); max-width: 90ch; }
+.notes:empty { display: none; }
+
+/* What-if chart: the plot area is the clean sheet; transitional bands are a warn wash with a ruled edge. */
+.chart-box { position: relative; min-width: 0; }
+.chart-box.scroll { overflow-x: auto; overflow-y: hidden; max-height: none; background: var(--field); border: 1px solid var(--line); border-radius: 3px; -webkit-overflow-scrolling: touch; }
+.chart-box svg { display: block; width: 100%; height: auto; }
+.chart-box svg.chart { min-width: 560px; }
+.chart-box svg text, svg.chart text { font-family: var(--mono); font-size: 12px; fill: var(--muted); }
+.chart .grid-line { stroke: var(--chart-grid); stroke-width: 1; }
+.chart .band { fill: var(--band); stroke: var(--band-edge); stroke-width: 1.5; }
+.chart .series { fill: none; stroke: var(--chart-1); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.chart .frac-line { stroke: var(--bad); stroke-width: 1.5; stroke-dasharray: 2 3; }
+.chart .mw-line { stroke: var(--chart-3); stroke-width: 1; stroke-dasharray: 5 4; }
+.chart .cur { fill: var(--chart-2); stroke: var(--field); stroke-width: 2; }
+.chart .cur-line { stroke: var(--chart-2); stroke-width: 1; }
+.chart .hover-line { stroke: var(--muted); stroke-width: 1; }
+.chart .hover-dot { fill: var(--chart-1); stroke: var(--field); stroke-width: 2; }
+svg.chart text.label { fill: var(--fg); font-weight: 600; paint-order: stroke; stroke: var(--field); stroke-width: 4px; stroke-linejoin: round; }
+svg.chart text.axis-text { paint-order: stroke; stroke: var(--field); stroke-width: 3px; stroke-linejoin: round; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; color: var(--muted); margin-top: 8px; }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { display: inline-block; width: 18px; height: 0; border-top: 2.5px solid var(--chart-1); }
+.legend i.sw-cur { width: 12px; height: 12px; border: 2px solid var(--field); outline: 1px solid var(--chart-2); background: var(--chart-2); border-radius: 50%; }
+.legend i.sw-band { width: 20px; height: 14px; border: 1.5px solid var(--band-edge); background: var(--band); }
+.legend i.sw-frac { border-top: 1.5px dashed var(--bad); }
+.legend i.sw-mw { border-top: 1px dashed var(--chart-3); }
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 6px 8px; font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; line-height: 1.4; white-space: nowrap; display: none; z-index: 2; color: var(--fg); }
+.tip b { font-weight: 600; color: var(--fg); }
+.tip .m { color: var(--muted); }
+
+/* The dip warning: a flagged remark on the report, washed in the same band colour the chart shades. */
+.dip-notes { list-style: none; margin: 14px 0 0; padding: 10px 14px 12px; border: 2px solid var(--band-edge); border-radius: 3px; background: var(--band); color: var(--fg); max-width: none; }
+.dip-notes::before { content: "Check: transitional-flow dip"; display: block; font-family: var(--display); font-size: 17px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--warn); margin-bottom: 4px; }
+.density-warn::before { content: "Check: density" !important; }
+.density-warn:empty { display: none; }
+.dip-notes li + li { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--band-edge); }
+
+/* Method and limits, footer */
+footer { margin-top: 10px; color: var(--muted); }
+footer > p { margin: 0 0 4px; }
+.maker { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+details { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 0 14px; margin-top: 14px; color: var(--fg); }
+summary { cursor: pointer; font-size: 1.35rem; padding: 10px 0; min-height: 44px; display: list-item; list-style-position: inside; }
+details[open] summary { border-bottom: 1px solid var(--hair); margin-bottom: 8px; }
+details[open] { padding-bottom: 12px; }
+details p, details li { max-width: 74ch; }
+details code, .eq { font-family: var(--mono); font-size: 13.5px; }
+.eq { display: block; background: var(--field); border: 1px solid var(--hair); padding: 8px 12px; margin: 8px 0; overflow-x: auto; white-space: pre; }
+#csv-text { min-height: 120px; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" data-cat="drilling">
+  <header class="sheet-head">
+    <p class="lab" aria-label="Report"><span>MODEL <b>API RP 13D 1995</b></span><span>ANNULUS <b>Power law</b></span><span>UNITS <b>ppg, gpm, psi</b></span></p>
+    <h1>ECD Check</h1>
+    <p class="lede">Annular pressure loss and ECD from mud weight, rheology, flow rate and annulus geometry. API RP 13D (1995) power-law annulus model.</p>
+    <p class="screen-note">Screening tool only. It is not a replacement for a full hydraulics program: no temperature or pressure effects on rheology, no pipe rotation, eccentricity, tool joints, cuttings load or surge/swab.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="h-fluid">
+    <div class="panel-head"><h2 id="h-fluid">Fluid and flow</h2><span class="tag" id="data-tag">Example data</span></div>
+    <div class="grid">
+      <div class="field"><label for="mw">Mud weight (ppg)</label><input id="mw" type="number" step="0.1" min="0" inputmode="decimal"></div>
+      <div class="field"><label for="q">Flow rate (gpm)</label><input id="q" type="number" step="10" min="0" inputmode="decimal"></div>
+      <div class="field"><label for="tvd">TVD of point of interest (ft)</label><input id="tvd" type="number" step="10" min="0" inputmode="decimal"></div>
+      <div class="field"><label for="frac">Fracture gradient at that TVD (ppg EMW, optional)</label><input id="frac" type="number" step="0.1" min="0" inputmode="decimal" placeholder="blank: no margin check"></div>
+    </div>
+    <h3>Rheology</h3>
+    <div class="seg" role="radiogroup" aria-label="Rheology input">
+      <input type="radio" name="rh" id="rh-fann" value="fann" checked><label for="rh-fann">Fann readings</label>
+      <input type="radio" name="rh" id="rh-pvyp" value="pvyp"><label for="rh-pvyp">PV / YP</label>
+    </div>
+    <div id="fann-box" class="grid" style="margin-top:12px">
+      <div class="field"><label for="r600">600 rpm</label><input id="r600" type="number" step="1" min="0" inputmode="decimal"></div>
+      <div class="field"><label for="r300">300 rpm</label><input id="r300" type="number" step="1" min="0" inputmode="decimal"></div>
+      <div class="field"><label for="r200">200 rpm (optional)</label><input id="r200" type="number" step="1" min="0" inputmode="decimal"></div>
+      <div class="field"><label for="r100">100 rpm</label><input id="r100" type="number" step="1" min="0" inputmode="decimal"></div>
+      <div class="field"><label for="r6">6 rpm (optional)</label><input id="r6" type="number" step="1" min="0" inputmode="decimal"></div>
+      <div class="field"><label for="r3">3 rpm</label><input id="r3" type="number" step="1" min="0" inputmode="decimal"></div>
+    </div>
+    <div id="pvyp-box" class="grid hidden" style="margin-top:12px">
+      <div class="field"><label for="pv">PV (cP)</label><input id="pv" type="number" step="1" min="0" inputmode="decimal"></div>
+      <div class="field"><label for="yp">YP (lbf/100 ft&#178;)</label><input id="yp" type="number" step="1" min="0" inputmode="decimal"></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-sec">
+    <div class="panel-head"><h2 id="h-sec">Annular sections</h2><span class="tag plain">surface to bit</span></div>
+    <div class="scroll">
+      <table class="sec-table">
+        <thead><tr><th scope="col">Name</th><th scope="col" class="num">Hole / casing ID (in)</th><th scope="col" class="num">Pipe OD (in)</th><th scope="col" class="num">Length MD (ft)</th><th scope="col"><span class="hidden">Remove</span></th></tr></thead>
+        <tbody id="sec-body"></tbody>
+      </table>
+    </div>
+    <div class="row-actions">
+      <button type="button" id="add-row">Add section</button>
+      <button type="button" id="load-example">Reset to example</button>
+      <label class="file-label" for="sec-file">Load sections CSV/TSV</label>
+      <input type="file" id="sec-file" accept=".csv,.tsv,.txt,text/csv,text/plain">
+    </div>
+    <p class="notes" style="list-style:none;padding:0">Columns: name, hole_id_in, pipe_od_in, length_ft. Header row optional. Comma or tab separated. 5 MB and 50,000 rows maximum.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h-res">
+    <div class="panel-head"><h2 id="h-res">Results</h2><button type="button" class="primary" id="copy-csv">Copy results as CSV</button></div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <div id="results">
+      <div class="chips" aria-label="Summary">
+        <div class="chip mark"><svg class="gauge" viewBox="0 0 220 116" aria-hidden="true"><path class="arc" d="M26 100A84 84 0 0 1 194 100"/><line class="tick major" x1="26.0" y1="100.0" x2="42.0" y2="100.0"/><line class="tick" x1="30.1" y1="74.0" x2="39.6" y2="77.1"/><line class="tick" x1="42.0" y1="50.6" x2="50.1" y2="56.5"/><line class="tick" x1="60.6" y1="32.0" x2="66.5" y2="40.1"/><line class="tick" x1="84.0" y1="20.1" x2="87.1" y2="29.6"/><line class="tick major" x1="110.0" y1="16.0" x2="110.0" y2="32.0"/><line class="tick" x1="136.0" y1="20.1" x2="132.9" y2="29.6"/><line class="tick" x1="159.4" y1="32.0" x2="153.5" y2="40.1"/><line class="tick" x1="178.0" y1="50.6" x2="169.9" y2="56.5"/><line class="tick" x1="189.9" y1="74.0" x2="180.4" y2="77.1"/><line class="tick major" x1="194.0" y1="100.0" x2="178.0" y2="100.0"/><text class="scale" x="26" y="114" text-anchor="middle">MW</text><text class="scale gauge-hi" x="194" y="114" text-anchor="middle"></text><line class="needle" x1="110" y1="100" x2="110" y2="34" transform="rotate(-90 110 100)"/><circle class="hub" cx="110" cy="100" r="6"/></svg><div class="k">ECD at TVD</div><div class="v"><span id="o-ecd">0</span><span class="u">ppg</span></div></div>
+        <div class="chip"><div class="k">Annular pressure loss</div><div class="v"><span id="o-apl">0</span><span class="u">psi</span></div></div>
+        <div class="chip"><div class="k">Hydrostatic</div><div class="v"><span id="o-hyd">0</span><span class="u">psi</span></div></div>
+        <div class="chip"><div class="k">BHCP</div><div class="v"><span id="o-bhcp">0</span><span class="u">psi</span></div></div>
+        <div class="chip"><div class="k">Margin to frac gradient</div><div class="v"><span id="o-margin">n/a</span><span class="u" id="o-margin-u"></span></div></div>
+      </div>
+      <div class="scroll">
+        <table class="res-table">
+          <thead><tr><th scope="col">Section</th><th scope="col" class="num">Va (ft/min)</th><th scope="col" class="num">&#956;e (cP)</th><th scope="col" class="num">Re</th><th scope="col">Regime</th><th scope="col" class="num">dP (psi)</th></tr></thead>
+          <tbody id="res-body"></tbody>
+          <tfoot><tr><td>Total</td><td></td><td></td><td></td><td></td><td class="num" id="o-total">0</td></tr></tfoot>
+        </table>
+      </div>
+      <ul class="notes dip-notes density-warn" id="density-warn"></ul>
+      <p class="notes" id="rheo-line"></p>
+      <ul class="notes" id="notes"></ul>
+      <div id="csv-fallback" class="hidden" style="margin-top:10px">
+        <label for="csv-text" class="file-label">Clipboard unavailable. Select and copy:</label>
+        <textarea id="csv-text" readonly></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-sweep">
+    <div class="panel-head"><h2 id="h-sweep">What-if: ECD vs flow rate</h2><span class="tag plain" id="sweep-range">0 to 0 gpm</span></div>
+    <div class="chart-box scroll" id="chart-box">
+      <svg class="chart" id="chart" viewBox="0 0 720 300" role="img" aria-labelledby="chart-title"><title id="chart-title">ECD versus flow rate</title></svg>
+      <div class="tip" id="tip"></div>
+    </div>
+    <div class="legend">
+      <span><i></i>ECD at TVD</span>
+      <span><i class="sw-cur"></i>Current rate</span>
+      <span><i class="sw-band"></i>Transitional flow in one or more sections</span>
+      <span><i class="sw-mw"></i>Mud weight (static)</span>
+      <span><i class="sw-frac"></i>Fracture gradient (when entered)</span>
+    </div>
+    <ul class="notes dip-notes" id="dip-notes"></ul>
+  </section>
+
+  <footer>
+    <p>Built by Will Whitmire. Runs entirely in your browser; nothing you enter is uploaded.</p>
+    <p class="maker">W. Whitmire / Field Tools / No. 04</p>
+    <details id="method">
+      <summary>Method and limits</summary>
+      <p>Model: API RP 13D, Third Edition (June 1995), power-law annulus. Units: ppg, gpm, in, ft, cP, psi. Dial readings in degrees on a standard R1-B1-F1 rotational viscometer.</p>
+      <span class="eq">n_a = 0.657 log10(R100 / R3)
+K_a = 5.11 R100 / 170.2^n_a                       dyne s^n / cm^2</span>
+      <p>When only 600 and 300 rpm are known (always the case with PV/YP, where R600 = 2 PV + YP and R300 = PV + YP), the annulus uses the 600/300 power law and the result says so:</p>
+      <span class="eq">n = 3.32 log10(R600 / R300)
+K = 5.11 R300 / 511^n</span>
+      <span class="eq">Va    = 24.48 Q / (D2^2 - D1^2)                    ft/min   (0.408 Q / (D2^2 - D1^2) ft/s)
+mu_ea = 100 K_a (144 Va / (D2 - D1))^(n_a - 1) ((2 n_a + 1) / (3 n_a))^n_a    cP, Va in ft/s
+Re_a  = 928 (D2 - D1) Va MW / mu_ea              Va in ft/s
+laminar      Re_a &lt; 3470 - 1370 n_a      f = 24 / Re_a
+turbulent    Re_a &gt; 4270 - 1370 n_a      f = a / Re_a^b,  a = (log10 n_a + 3.93)/50,  b = (1.75 - log10 n_a)/7
+transitional between: f linear in Re_a between the laminar f at the lower bound and the turbulent f at the upper bound
+dP    = f Va^2 MW / (25.81 (D2 - D1)) L          psi, Va in ft/s
+P_hyd = 0.052 MW TVD     ECD = MW + APL / (0.052 TVD)     BHCP = P_hyd + APL</span>
+      <p>Limits, stated plainly:</p>
+      <ul>
+        <li>Isothermal, incompressible fluid. Rheology is taken as measured at surface; downhole temperature and pressure change it.</li>
+        <li>Concentric annulus, no pipe rotation, no tool joints, no eccentricity. Real laterals with eccentric pipe usually lose less in laminar flow than this predicts.</li>
+        <li>No cuttings load, no surge/swab, no gel breaking. ECD is for steady circulation with clean mud.</li>
+        <li>All of the listed annulus pressure loss is applied at the given TVD. List only the sections above the point of interest.</li>
+        <li>The 1995 transitional friction factor is a straight-line blend. Across the transition band, computed loss can fall as rate rises. The chart shades that band.</li>
+        <li>Power law has no yield stress. With PV/YP only, low-shear behavior is not represented and annular loss in large, slow annuli is usually under-predicted.</li>
+        <li>The 2006 and later editions of API RP 13D use the Herschel-Bulkley model and different regime criteria. Results will differ.</li>
+      </ul>
+    </details>
+  </footer>
+</div>
+
+<script id="core">
+"use strict";
+// Pure functions. No DOM access. Mirrors src/ecd_check/core.py and parse.py.
+var VA_CONST = 24.48, HYDROSTATIC_CONST = 0.052, RE_CONST = 928.0, DP_CONST = 25.81;
+var DIAL_TO_DYNE = 5.11, SHEAR_100 = 170.2, SHEAR_300 = 511.0;
+var RPMS = [600, 300, 200, 100, 6, 3];
+var MAX_ROWS = 50000;
+
+function InputError(msg) { var e = new Error(msg); e.name = "InputError"; return e; }
+
+function g(x) {
+  // Short number format for messages (like Python :g for typical values).
+  if (!isFinite(x)) return String(x);
+  var s = Number(x.toPrecision(6)).toString();
+  return s;
+}
+
+function num(value, label) {
+  if (typeof value === "boolean" || value === null || value === undefined) throw InputError(label + " must be a number.");
+  var x;
+  if (typeof value === "number") x = value;
+  else if (typeof value === "string") {
+    var t = value.trim();
+    if (t === "" || !/^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$/.test(t)) throw InputError(label + " must be a number, got '" + value + "'.");
+    x = Number(t);
+  } else throw InputError(label + " must be a number.");
+  if (!isFinite(x)) throw InputError(label + " must be a finite number.");
+  return x;
+}
+
+function dialFromPvYp(pv, yp) {
+  var p = num(pv, "PV"), y = num(yp, "YP");
+  if (p <= 0) throw InputError("PV must be greater than 0 cP.");
+  if (y < 0) throw InputError("YP cannot be negative.");
+  return { 600: 2 * p + y, 300: p + y };
+}
+
+function rheologyParams(readings) {
+  var r = {};
+  var keys = Object.keys(readings);
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i], val = readings[key];
+    if (val === null || val === undefined || (typeof val === "string" && val.trim() === "")) continue;
+    var rpm = parseInt(key, 10);
+    if (String(rpm) !== String(key).trim()) throw InputError("Unknown viscometer speed '" + key + "'.");
+    if (RPMS.indexOf(rpm) < 0) throw InputError("Unsupported viscometer speed " + rpm + " rpm. Use 600, 300, 200, 100, 6, 3.");
+    var x = num(val, rpm + " rpm reading");
+    if (x <= 0) throw InputError(rpm + " rpm reading must be greater than 0.");
+    r[rpm] = x;
+  }
+  if (!(600 in r) || !(300 in r)) throw InputError("600 and 300 rpm readings are required.");
+  var present = RPMS.filter(function (s) { return s in r; });
+  for (var j = 0; j + 1 < present.length; j++) {
+    var hi = present[j], lo = present[j + 1];
+    if (r[lo] > r[hi]) throw InputError("Dial readings must not increase as speed drops: " + lo + " rpm (" + g(r[lo]) + ") > " + hi + " rpm (" + g(r[hi]) + ").");
+  }
+  if (r[600] <= r[300]) throw InputError("600 rpm reading must be greater than 300 rpm reading.");
+  var notes = [], n, k, basis;
+  if ((100 in r) && (3 in r)) {
+    if (r[100] <= r[3]) throw InputError("100 rpm reading must be greater than 3 rpm reading.");
+    n = 0.657 * Math.log10(r[100] / r[3]);
+    var kNum = r[100], kRate = SHEAR_100;
+    basis = "fann_100_3";
+    notes.push("Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus).");
+  } else {
+    n = 3.32 * Math.log10(r[600] / r[300]);
+    var kNum = r[300], kRate = SHEAR_300;
+    basis = "fallback_600_300";
+    var missing = [100, 3].filter(function (s) { return !(s in r); }).map(String);
+    notes.push("100/3 rpm readings not available (missing " + missing.join(", ") + " rpm). Annular n and K use the 600/300 rpm power law; low-shear behavior is not represented.");
+  }
+  if (n > 2.0) throw InputError("Flow behavior index n = " + n.toFixed(3) + " is outside the range this model handles (n <= 2). Check the readings.");
+  k = DIAL_TO_DYNE * kNum / Math.pow(kRate, n);
+  if (n > 1.0) notes.push("n = " + n.toFixed(3) + " is above 1 (shear thickening). Typical drilling fluids have n < 1; check the readings.");
+  return { n: n, K: k, basis: basis, readings: r, notes: notes };
+}
+
+function frictionFactor(re, n) {
+  var rc1 = 3470.0 - 1370.0 * n, rc2 = 4270.0 - 1370.0 * n;
+  var a = (Math.log10(n) + 3.93) / 50.0, b = (1.75 - Math.log10(n)) / 7.0;
+  if (re < rc1) return { f: 24.0 / re, regime: "laminar", re_c1: rc1, re_c2: rc2 };
+  if (re > rc2) return { f: a / Math.pow(re, b), regime: "turbulent", re_c1: rc1, re_c2: rc2 };
+  var f1 = 24.0 / rc1, f2 = a / Math.pow(rc2, b);
+  return { f: (re - rc1) / (rc2 - rc1) * (f2 - f1) + f1, regime: "transitional", re_c1: rc1, re_c2: rc2 };
+}
+
+function sectionHydraulics(d2, d1, length, q, mw, n, k) {
+  var gap = d2 - d1;
+  var vaFpm = VA_CONST * q / (d2 * d2 - d1 * d1);
+  var vaFps = vaFpm / 60.0;
+  if (q === 0) {
+    return { va_fpm: 0, va_fps: 0, shear_rate: 0, mu_ea_cp: null, re: 0, f: null, regime: "no flow",
+      re_c1: 3470.0 - 1370.0 * n, re_c2: 4270.0 - 1370.0 * n, dp_psi: 0, grad_psi_ft: 0 };
+  }
+  var shear = 144.0 * vaFps / gap;
+  var mu = 100.0 * k * Math.pow(shear, n - 1.0) * Math.pow((2.0 * n + 1.0) / (3.0 * n), n);
+  var re = RE_CONST * gap * vaFps * mw / mu;
+  if (!(re > 0 && isFinite(re))) throw InputError("Flow rate " + g(q) + " gpm is too small to evaluate. Use 0 for no flow.");
+  var ff = frictionFactor(re, n);
+  var grad = ff.f * vaFps * vaFps * mw / (DP_CONST * gap);
+  return { va_fpm: vaFpm, va_fps: vaFps, shear_rate: shear, mu_ea_cp: mu, re: re, f: ff.f, regime: ff.regime,
+    re_c1: ff.re_c1, re_c2: ff.re_c2, dp_psi: grad * length, grad_psi_ft: grad };
+}
+
+function validateSection(sec, idx) {
+  var label = "Section " + (idx + 1);
+  sec = sec || {};
+  var name = (sec.name === null || sec.name === undefined) ? "" : String(sec.name).trim();
+  if (!name) name = label;
+  if (name.length > 80) name = name.slice(0, 80);
+  var hole = num(sec.hole_id_in, label + " hole/casing ID");
+  var pipe = num(sec.pipe_od_in, label + " pipe OD");
+  var length = num(sec.length_ft, label + " length");
+  if (hole <= 0) throw InputError(label + " hole/casing ID must be greater than 0.");
+  if (pipe < 0) throw InputError(label + " pipe OD cannot be negative.");
+  if (pipe >= hole) throw InputError(label + ": pipe OD (" + g(pipe) + " in) must be smaller than hole/casing ID (" + g(hole) + " in).");
+  if (length < 0) throw InputError(label + " length cannot be negative.");
+  if (hole > 60) throw InputError(label + " hole/casing ID of " + g(hole) + " in is outside the supported range (60 in max).");
+  return { name: name, hole_id_in: hole, pipe_od_in: pipe, length_ft: length };
+}
+
+function normalizeCase(c) {
+  if (!c || typeof c !== "object") throw InputError("Case must be an object.");
+  var mw = num(c.mud_weight_ppg, "Mud weight"), q = num(c.flow_rate_gpm, "Flow rate"), tvd = num(c.tvd_ft, "TVD");
+  if (mw <= 0) throw InputError("Mud weight must be greater than 0 ppg.");
+  if (mw > 25) throw InputError("Mud weight above 25 ppg is outside the supported range.");
+  if (q < 0) throw InputError("Flow rate cannot be negative.");
+  if (tvd <= 0) throw InputError("TVD must be greater than 0 ft.");
+  var rh = c.rheology;
+  if (!rh || typeof rh !== "object") throw InputError("Rheology is required: Fann readings or PV and YP.");
+  var notes = [], params, source;
+  if (rh.fann !== null && rh.fann !== undefined) {
+    if (typeof rh.fann !== "object") throw InputError("Fann readings must be a mapping of rpm to dial reading.");
+    params = rheologyParams(rh.fann); source = "fann";
+  } else if ((rh.pv_cp !== null && rh.pv_cp !== undefined) || (rh.yp !== null && rh.yp !== undefined)) {
+    var d = dialFromPvYp(rh.pv_cp, rh.yp);
+    params = rheologyParams(d); source = "pv_yp";
+    notes.push("PV/YP converted to dial readings: R600 = 2 PV + YP = " + g(d[600]) + ", R300 = PV + YP = " + g(d[300]) + ".");
+  } else throw InputError("Rheology is required: Fann readings or PV and YP.");
+  notes = notes.concat(params.notes);
+  var secs = c.sections;
+  if (!Array.isArray(secs) || secs.length === 0) throw InputError("At least one annular section is required.");
+  if (secs.length > 200) throw InputError("At most 200 annular sections are supported.");
+  var sections = secs.map(function (s, i) { return validateSection(s, i); });
+  var frac = c.frac_emw_ppg;
+  if (frac === undefined || frac === null || (typeof frac === "string" && frac.trim() === "")) frac = null;
+  else {
+    frac = num(frac, "Fracture gradient");
+    if (!(frac > 0 && frac <= 30)) throw InputError("Fracture gradient must be above 0 and at most 30 ppg EMW.");
+  }
+  var totalMd = sections.reduce(function (a, s) { return a + s.length_ft; }, 0);
+  if (tvd > totalMd + 1e-9) notes.push("TVD (" + g(tvd) + " ft) exceeds total section length (" + g(totalMd) + " ft). Annular loss covers only the listed sections.");
+  return { frac_emw_ppg: frac, mud_weight_ppg: mw, flow_rate_gpm: q, tvd_ft: tvd, sections: sections, rheology_source: source,
+    n: params.n, K: params.K, basis: params.basis, readings: params.readings, notes: notes };
+}
+
+function evaluate(c, qOverride) {
+  var nc = normalizeCase(c);
+  var q = (qOverride === undefined || qOverride === null) ? nc.flow_rate_gpm : num(qOverride, "Flow rate");
+  if (q < 0) throw InputError("Flow rate cannot be negative.");
+  var mw = nc.mud_weight_ppg, tvd = nc.tvd_ft, n = nc.n, k = nc.K;
+  var rows = nc.sections.map(function (s) {
+    var h = sectionHydraulics(s.hole_id_in, s.pipe_od_in, s.length_ft, q, mw, n, k);
+    var row = { name: s.name, hole_id_in: s.hole_id_in, pipe_od_in: s.pipe_od_in, length_ft: s.length_ft };
+    for (var key in h) row[key] = h[key];
+    return row;
+  });
+  var apl = 0;
+  for (var i = 0; i < rows.length; i++) apl += rows[i].dp_psi;
+  var notes = nc.notes.slice();
+  var trans = rows.filter(function (r) { return r.regime === "transitional"; }).map(function (r) { return r.name; });
+  if (trans.length) notes.push("Transitional flow in: " + trans.join("; ") + ". The 1995 transition friction factor is a straight-line blend; pressure loss can fall as rate rises across this band. Treat ECD here as uncertain.");
+  var hydro = HYDROSTATIC_CONST * mw * tvd;
+  var ecd = mw + apl / (HYDROSTATIC_CONST * tvd);
+  return {
+    inputs: { mud_weight_ppg: mw, flow_rate_gpm: q, tvd_ft: tvd },
+    rheology: { source: nc.rheology_source, basis: nc.basis, n: n, K: k, readings: nc.readings },
+    sections: rows,
+    total_md_ft: nc.sections.reduce(function (a, s) { return a + s.length_ft; }, 0),
+    apl_psi: apl, hydrostatic_psi: hydro, bhcp_psi: hydro + apl, ecd_ppg: ecd,
+    esd_ppg: mw, frac_emw_ppg: nc.frac_emw_ppg, frac_margin_ppg: nc.frac_emw_ppg === null ? null : nc.frac_emw_ppg - ecd,
+    warnings: densityChecks(mw, ecd, nc.frac_emw_ppg), notes: notes
+  };
+}
+
+var ECD_MAX_PLAUSIBLE_PPG = 25.0, ECD_RISE_FLAG_PPG = 2.0, FRAC_NEAR_PPG = 0.3;
+function f2(x) { return x.toFixed(2); }
+// Plain warnings when ESD (static mud weight) or ECD is implausible or reaches the fracture gradient. Mirrors core.py.
+function densityChecks(mw, ecd, frac) {
+  var out = [];
+  if (ecd > ECD_MAX_PLAUSIBLE_PPG) {
+    out.push({ code: "ecd_implausible", message: "ECD of " + f2(ecd) + " ppg is above 25 ppg, heavier than any drilling fluid in use. Check the flow rate, the hole and pipe sizes, and the rheology." });
+  } else if (ecd - mw > ECD_RISE_FLAG_PPG) {
+    out.push({ code: "ecd_large_rise", message: "Annular friction adds " + f2(ecd - mw) + " ppg to the mud weight, more than 2 ppg. That is unusual for a drilling annulus; check the flow rate and the annulus sizes." });
+  }
+  if (frac !== null) {
+    if (mw >= frac) out.push({ code: "esd_over_frac", message: "Static mud weight (ESD) " + f2(mw) + " ppg is at or above the fracture gradient " + f2(frac) + " ppg. Losses are expected even with the pumps off." });
+    else if (ecd > frac) out.push({ code: "ecd_over_frac", message: "ECD " + f2(ecd) + " ppg exceeds the fracture gradient " + f2(frac) + " ppg by " + f2(ecd - frac) + " ppg. Losses are likely while circulating at this rate." });
+    else if (frac - ecd < FRAC_NEAR_PPG) out.push({ code: "ecd_near_frac", message: "ECD " + f2(ecd) + " ppg is within 0.3 ppg of the fracture gradient " + f2(frac) + " ppg." });
+  }
+  return out;
+}
+
+function defaultSweepRates(q, steps) {
+  steps = steps || 41;
+  var top = Math.max(1.5 * q, 100.0), out = [];
+  for (var i = 0; i < steps; i++) out.push(top * i / (steps - 1));
+  return out;
+}
+
+function ecdSweep(c, rates) {
+  if (!rates) rates = defaultSweepRates(normalizeCase(c).flow_rate_gpm);
+  return rates.map(function (q) {
+    var r = evaluate(c, q);
+    return { q_gpm: r.inputs.flow_rate_gpm, apl_psi: r.apl_psi, ecd_ppg: r.ecd_ppg,
+      transitional: r.sections.some(function (s) { return s.regime === "transitional"; }) };
+  });
+}
+
+function sweepDips(sweep) {
+  // Rate ranges where computed ECD falls as rate rises. Mirrors sweep_dips in core.py.
+  var out = [], i = 1;
+  while (i < sweep.length) {
+    if (sweep[i].ecd_ppg < sweep[i - 1].ecd_ppg) {
+      var j = i;
+      while (j + 1 < sweep.length && sweep[j + 1].ecd_ppg < sweep[j].ecd_ppg) j++;
+      out.push({ q_from: sweep[i - 1].q_gpm, q_to: sweep[j].q_gpm, ecd_from: sweep[i - 1].ecd_ppg, ecd_to: sweep[j].ecd_ppg });
+      i = j + 1;
+    } else i++;
+  }
+  return out;
+}
+
+function toFloatCell(cell) {
+  var t = cell.trim();
+  if (t === "" || !/^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$/.test(t)) return null;
+  var x = Number(t);
+  return isFinite(x) ? x : null;
+}
+
+function splitLine(line) {
+  var sep = line.indexOf("\t") >= 0 ? "\t" : ",";
+  return line.split(sep).map(function (c) { return c.trim().replace(/^"+|"+$/g, "").trim(); });
+}
+
+var HEADER_KEYS = {
+  name: ["name", "section", "label", "description"],
+  hole_id_in: ["hole", "casing", "id", "d2"],
+  pipe_od_in: ["pipe", "od", "d1", "string"],
+  length_ft: ["length", "len", "md", "ft"]
+};
+
+function matchHeader(cells) {
+  var low = cells.map(function (c) { return c.toLowerCase(); });
+  var mapping = {}, used = [];
+  ["length_ft", "pipe_od_in", "hole_id_in", "name"].forEach(function (key) {
+    for (var i = 0; i < low.length; i++) {
+      if (used.indexOf(i) >= 0) continue;
+      if (HEADER_KEYS[key].some(function (tok) { return low[i].indexOf(tok) >= 0; })) { mapping[key] = i; used.push(i); break; }
+    }
+  });
+  if ("hole_id_in" in mapping && "pipe_od_in" in mapping && "length_ft" in mapping) return mapping;
+  return null;
+}
+
+function parseSectionsText(text) {
+  if (typeof text !== "string") throw InputError("Section file must be text.");
+  text = text.replace(/^\uFEFF+/, "");
+  var raw = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
+  var lines = [];
+  for (var i = 0; i < raw.length; i++) {
+    if (raw[i].trim() === "" || raw[i].replace(/^\s+/, "").charAt(0) === "#") continue;
+    lines.push([i + 1, raw[i]]);
+  }
+  if (!lines.length) throw InputError("Section file is empty.");
+  if (lines.length > MAX_ROWS + 1) throw InputError("Section file has more than " + MAX_ROWS + " rows.");
+  var first = splitLine(lines[0][1]);
+  var mapping = null, body = lines;
+  if (first.filter(function (c) { return toFloatCell(c) !== null; }).length < 3) {
+    mapping = matchHeader(first);
+    if (!mapping) throw InputError("Line " + lines[0][0] + " is neither a header row (name, hole_id_in, pipe_od_in, length_ft) nor a data row with numbers for hole ID, pipe OD and length: \"" + lines[0][1].trim().slice(0, 60) + "\".");
+    body = lines.slice(1);
+  }
+  var out = [], labels = ["hole/casing ID", "pipe OD", "length"];
+  for (var j = 0; j < body.length; j++) {
+    var no = body[j][0], cells = splitLine(body[j][1]), name, vals;
+    if (mapping) {
+      var maxIdx = Math.max(mapping.hole_id_in, mapping.pipe_od_in, mapping.length_ft, ("name" in mapping) ? mapping.name : 0);
+      if (maxIdx >= cells.length) throw InputError("Line " + no + ": expected at least " + (maxIdx + 1) + " columns.");
+      name = ("name" in mapping) ? cells[mapping.name] : "";
+      vals = [cells[mapping.hole_id_in], cells[mapping.pipe_od_in], cells[mapping.length_ft]];
+    } else if (cells.length >= 4) { name = cells[0]; vals = cells.slice(1, 4); }
+    else if (cells.length === 3) { name = ""; vals = cells; }
+    else throw InputError("Line " + no + ": expected name, hole ID, pipe OD, length.");
+    var nums = [];
+    for (var m = 0; m < 3; m++) {
+      var v = toFloatCell(vals[m]);
+      if (v === null) throw InputError("Line " + no + ": " + labels[m] + " '" + vals[m] + "' is not a number.");
+      nums.push(v);
+    }
+    out.push({ name: name.slice(0, 80) || ("Section " + (out.length + 1)), hole_id_in: nums[0], pipe_od_in: nums[1], length_ft: nums[2] });
+  }
+  if (!out.length) throw InputError("Section file has a header but no data rows.");
+  return out;
+}
+
+var EXAMPLE_CASE = {
+  label: "Example data",
+  mud_weight_ppg: 9.8, flow_rate_gpm: 550.0, tvd_ft: 9800.0,
+  rheology: { fann: { "600": 52, "300": 33, "200": 25, "100": 17, "6": 6, "3": 5 } },
+  sections: [
+    { name: "Casing 8.835 in ID x 5 in DP", hole_id_in: 8.835, pipe_od_in: 5.0, length_ft: 9200.0 },
+    { name: "Open hole 8.5 in x 5 in DP (curve)", hole_id_in: 8.5, pipe_od_in: 5.0, length_ft: 1400.0 },
+    { name: "Open hole 8.5 in x 4.5 in DP (lateral)", hole_id_in: 8.5, pipe_od_in: 4.5, length_ft: 8500.0 },
+    { name: "Open hole 8.5 in x 6.75 in BHA", hole_id_in: 8.5, pipe_od_in: 6.75, length_ft: 280.0 }
+  ]
+};
+
+function resultsCsv(res) {
+  function q(s) {
+    // Neutralize spreadsheet formula injection: a cell starting with = + - @ tab or CR gets a leading quote.
+    s = String(s); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+    return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+  var lines = ["section,hole_id_in,pipe_od_in,length_ft,va_ft_min,mu_ea_cp,reynolds,regime,dp_psi"];
+  res.sections.forEach(function (s) {
+    lines.push([q(s.name), s.hole_id_in, s.pipe_od_in, s.length_ft, s.va_fpm.toFixed(2),
+      s.mu_ea_cp === null ? "" : s.mu_ea_cp.toFixed(3), s.re.toFixed(0), s.regime, s.dp_psi.toFixed(2)].join(","));
+  });
+  lines.push("");
+  lines.push("mud_weight_ppg," + res.inputs.mud_weight_ppg);
+  lines.push("flow_rate_gpm," + res.inputs.flow_rate_gpm);
+  lines.push("tvd_ft," + res.inputs.tvd_ft);
+  lines.push("n," + res.rheology.n.toFixed(5));
+  lines.push("K_dyne_s_n_cm2," + res.rheology.K.toFixed(5));
+  lines.push("rheology_basis," + res.rheology.basis);
+  lines.push("annular_pressure_loss_psi," + res.apl_psi.toFixed(2));
+  lines.push("hydrostatic_psi," + res.hydrostatic_psi.toFixed(2));
+  lines.push("bhcp_psi," + res.bhcp_psi.toFixed(2));
+  lines.push("ecd_ppg," + res.ecd_ppg.toFixed(4));
+  lines.push("esd_ppg," + res.esd_ppg.toFixed(4));
+  if (res.frac_emw_ppg !== null) { lines.push("frac_emw_ppg," + res.frac_emw_ppg); lines.push("frac_margin_ppg," + res.frac_margin_ppg.toFixed(4)); }
+  res.warnings.forEach(function (w) { lines.push("check," + q(w.message)); });
+  lines.push("method,API RP 13D (1995) power-law annulus; screening only");
+  return lines.join("\n");
+}
+</script>
+
+<script>
+"use strict";
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var MAX_BYTES = 5 * 1024 * 1024;
+  var lastResult = null;
+  var isExample = true;
+  var FANN_IDS = { "600": "r600", "300": "r300", "200": "r200", "100": "r100", "6": "r6", "3": "r3" };
+  var rowCounter = 0;
+
+  function fmt(x, d) { return x.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+
+  function addRow(sec) {
+    rowCounter += 1;
+    var id = "s" + rowCounter;
+    var tr = document.createElement("tr");
+    var fields = [["name", "text", "Name"], ["hole_id_in", "number", "Hole or casing ID, in"], ["pipe_od_in", "number", "Pipe OD, in"], ["length_ft", "number", "Length, ft"]];
+    fields.forEach(function (f) {
+      var td = document.createElement("td");
+      var lab = document.createElement("label");
+      lab.className = "hidden"; lab.htmlFor = id + "-" + f[0]; lab.textContent = f[2] + " (row " + rowCounter + ")";
+      var inp = document.createElement("input");
+      inp.type = f[1]; inp.id = id + "-" + f[0]; inp.dataset.key = f[0];
+      if (f[1] === "number") { inp.step = "any"; inp.min = "0"; inp.inputMode = "decimal"; inp.className = "num"; }
+      if (sec && sec[f[0]] !== undefined) inp.value = String(sec[f[0]]);
+      td.appendChild(lab); td.appendChild(inp);
+      if (f[1] === "number") td.className = "num";
+      tr.appendChild(td);
+    });
+    var tdx = document.createElement("td");
+    var btn = document.createElement("button");
+    btn.type = "button"; btn.className = "icon"; btn.id = id + "-remove"; btn.textContent = "x";
+    btn.setAttribute("aria-label", "Remove section row " + rowCounter);
+    btn.addEventListener("click", function () { tr.remove(); markEdited(); recompute(); });
+    tdx.appendChild(btn); tr.appendChild(tdx);
+    $("sec-body").appendChild(tr);
+  }
+
+  function setSections(list) {
+    $("sec-body").textContent = "";
+    list.forEach(addRow);
+  }
+
+  function loadExample() {
+    var c = EXAMPLE_CASE;
+    $("mw").value = c.mud_weight_ppg; $("q").value = c.flow_rate_gpm; $("tvd").value = c.tvd_ft; $("frac").value = "";
+    Object.keys(FANN_IDS).forEach(function (k) { $(FANN_IDS[k]).value = c.rheology.fann[k] !== undefined ? c.rheology.fann[k] : ""; });
+    $("pv").value = 19; $("yp").value = 14;
+    $("rh-fann").checked = true; syncRheoMode();
+    setSections(c.sections);
+    isExample = true; $("data-tag").textContent = "Example data";
+    recompute();
+  }
+
+  function markEdited() { if (isExample) { isExample = false; $("data-tag").textContent = "Your data"; } }
+
+  function syncRheoMode() {
+    var fann = $("rh-fann").checked;
+    $("fann-box").classList.toggle("hidden", !fann);
+    $("pvyp-box").classList.toggle("hidden", fann);
+  }
+
+  function readCase() {
+    var c = { mud_weight_ppg: $("mw").value, flow_rate_gpm: $("q").value, tvd_ft: $("tvd").value };
+    if ($("frac").value.trim() !== "" || ($("frac").validity && $("frac").validity.badInput)) c.frac_emw_ppg = $("frac").value.trim() === "" ? "not a number" : $("frac").value;
+    if ($("rh-fann").checked) {
+      var f = {};
+      Object.keys(FANN_IDS).forEach(function (k) { f[k] = $(FANN_IDS[k]).value; });
+      c.rheology = { fann: f };
+    } else c.rheology = { pv_cp: $("pv").value, yp: $("yp").value };
+    c.sections = Array.prototype.map.call($("sec-body").querySelectorAll("tr"), function (tr) {
+      var s = {};
+      tr.querySelectorAll("input").forEach(function (inp) { s[inp.dataset.key] = inp.value; });
+      return s;
+    });
+    return c;
+  }
+
+  function chip(regime) {
+    var span = document.createElement("span");
+    span.className = "regime " + (regime === "no flow" ? "noflow" : regime);
+    span.textContent = regime;
+    return span;
+  }
+
+  function td(text, cls) { var e = document.createElement("td"); e.textContent = text; if (cls) e.className = cls; return e; }
+
+  function setGauge(res) {
+    // Decorative: the dial reads ECD above static mud weight; full scale is the first of 0.5/1/2/5/10 ppg that holds it.
+    var g = document.querySelector(".chip.mark .gauge"); if (!g) return;
+    var over = Math.max(0, res.ecd_ppg - res.inputs.mud_weight_ppg), spans = [0.5, 1, 2, 5, 10], span = spans[spans.length - 1];
+    for (var i = 0; i < spans.length; i++) { if (over <= spans[i]) { span = spans[i]; break; } }
+    var ang = -90 + 180 * Math.min(over / span, 1);
+    g.querySelector(".needle").setAttribute("transform", "rotate(" + ang.toFixed(1) + " 110 100)");
+    g.querySelector(".gauge-hi").textContent = "MW+" + span.toFixed(1);
+  }
+
+  function renderResult(res) {
+    $("o-ecd").textContent = fmt(res.ecd_ppg, 2);
+    $("o-apl").textContent = fmt(res.apl_psi, 0);
+    $("o-hyd").textContent = fmt(res.hydrostatic_psi, 0);
+    $("o-bhcp").textContent = fmt(res.bhcp_psi, 0);
+    $("o-total").textContent = fmt(res.apl_psi, 1);
+    $("o-margin").textContent = res.frac_margin_ppg === null ? "n/a" : (res.frac_margin_ppg >= 0 ? "" : "-") + fmt(Math.abs(res.frac_margin_ppg), 2);
+    $("o-margin-u").textContent = res.frac_margin_ppg === null ? "" : "ppg";
+    var dw = $("density-warn"); dw.textContent = "";
+    res.warnings.forEach(function (w) { var li = document.createElement("li"); li.textContent = w.message; dw.appendChild(li); });
+    setGauge(res);
+    var body = $("res-body"); body.textContent = "";
+    res.sections.forEach(function (s) {
+      var tr = document.createElement("tr");
+      tr.appendChild(td(s.name));
+      tr.appendChild(td(fmt(s.va_fpm, 1), "num"));
+      tr.appendChild(td(s.mu_ea_cp === null ? "n/a" : fmt(s.mu_ea_cp, 1), "num"));
+      tr.appendChild(td(fmt(s.re, 0), "num"));
+      var c = document.createElement("td"); c.appendChild(chip(s.regime)); tr.appendChild(c);
+      tr.appendChild(td(fmt(s.dp_psi, 1), "num"));
+      body.appendChild(tr);
+    });
+    var rb = res.rheology.basis === "fann_100_3" ? "100/3 rpm (API annulus)" : "600/300 rpm fallback";
+    $("rheo-line").textContent = "Annular n = " + res.rheology.n.toFixed(4) + ", K = " + res.rheology.K.toFixed(4) + " dyne s^n/cm^2, from " + rb + ".";
+    var ul = $("notes"); ul.textContent = "";
+    res.notes.forEach(function (n) { var li = document.createElement("li"); li.textContent = n; ul.appendChild(li); });
+  }
+
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function el(name, attrs, text) {
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  function niceStep(span, target) {
+    var raw = span / target, p = Math.pow(10, Math.floor(Math.log10(raw))), m = raw / p;
+    return (m < 1.5 ? 1 : m < 3 ? 2 : m < 7 ? 5 : 10) * p;
+  }
+
+  var chartState = null;
+  function renderChart(c, res) {
+    var svg = $("chart");
+    while (svg.childNodes.length > 1) svg.removeChild(svg.lastChild);
+    var q0 = res.inputs.flow_rate_gpm;
+    var sweep = ecdSweep(c, defaultSweepRates(q0, 121));
+    var W = 720, H = 300, L = 56, R = 16, T = 14, B = 40;
+    var xmax = sweep[sweep.length - 1].q_gpm;
+    var ys = sweep.map(function (s) { return s.ecd_ppg; }).concat([res.inputs.mud_weight_ppg, res.ecd_ppg]);
+    if (res.frac_emw_ppg !== null) ys.push(res.frac_emw_ppg);
+    var ymin = Math.min.apply(null, ys), ymax = Math.max.apply(null, ys);
+    if (ymax - ymin < 0.2) { ymax = ymin + 0.2; }
+    var ystep = niceStep(ymax - ymin, 5);
+    ymin = Math.floor(ymin / ystep) * ystep; ymax = Math.ceil(ymax / ystep) * ystep;
+    var xstep = niceStep(xmax, 6);
+    var X = function (q) { return L + (W - L - R) * q / xmax; };
+    var Y = function (v) { return T + (H - T - B) * (1 - (v - ymin) / (ymax - ymin)); };
+    // transitional bands
+    var dx = xmax / (sweep.length - 1), start = null;
+    sweep.forEach(function (s, i) {
+      if (s.transitional && start === null) start = s.q_gpm;
+      var last = i === sweep.length - 1;
+      if (start !== null && (!s.transitional || last)) {
+        var endQ = s.transitional ? s.q_gpm : sweep[i - 1].q_gpm;
+        var x0 = X(Math.max(0, start - dx / 2)), x1 = X(Math.min(xmax, endQ + dx / 2));
+        svg.appendChild(el("rect", { "class": "band", x: x0, y: T, width: Math.max(0, x1 - x0), height: H - T - B }));
+        start = null;
+      }
+    });
+    for (var yv = ymin; yv <= ymax + 1e-9; yv += ystep) {
+      svg.appendChild(el("line", { "class": "grid-line", x1: L, x2: W - R, y1: Y(yv), y2: Y(yv) }));
+      svg.appendChild(el("text", { "class": "axis-text", x: L - 6, y: Y(yv) + 4, "text-anchor": "end" }, yv.toFixed(ystep < 0.1 ? 2 : 1)));
+    }
+    for (var xv = 0; xv <= xmax + 1e-9; xv += xstep) {
+      svg.appendChild(el("text", { "class": "axis-text", x: X(xv), y: H - B + 16, "text-anchor": "middle" }, String(Math.round(xv))));
+    }
+    svg.appendChild(el("text", { "class": "axis-text", x: (L + W - R) / 2, y: H - 6, "text-anchor": "middle" }, "Flow rate (gpm)"));
+    svg.appendChild(el("text", { "class": "axis-text", x: 12, y: (T + H - B) / 2, "text-anchor": "middle", transform: "rotate(-90 12 " + ((T + H - B) / 2) + ")" }, "ECD (ppg)"));
+    svg.appendChild(el("line", { "class": "mw-line", x1: L, x2: W - R, y1: Y(res.inputs.mud_weight_ppg), y2: Y(res.inputs.mud_weight_ppg) }));
+    if (res.frac_emw_ppg !== null && res.frac_emw_ppg >= ymin && res.frac_emw_ppg <= ymax) {
+      svg.appendChild(el("line", { "class": "frac-line", x1: L, x2: W - R, y1: Y(res.frac_emw_ppg), y2: Y(res.frac_emw_ppg) }));
+      svg.appendChild(el("text", { "class": "axis-text", x: W - R - 4, y: Y(res.frac_emw_ppg) - 5, "text-anchor": "end" }, "Frac " + fmt(res.frac_emw_ppg, 2)));
+    }
+    var d = sweep.map(function (s, i) { return (i ? "L" : "M") + X(s.q_gpm).toFixed(2) + " " + Y(s.ecd_ppg).toFixed(2); }).join(" ");
+    svg.appendChild(el("path", { "class": "series", d: d }));
+    svg.appendChild(el("line", { "class": "cur-line", x1: X(q0), x2: X(q0), y1: T, y2: H - B }));
+    svg.appendChild(el("circle", { "class": "cur", cx: X(q0), cy: Y(res.ecd_ppg), r: 5.5 }));
+    var lx = X(q0), anchor = lx > W - 150 ? "end" : "start", off = anchor === "end" ? -9 : 9;
+    var ly = Y(res.ecd_ppg) - 10; if (ly < T + 12) ly = Y(res.ecd_ppg) + 18;
+    svg.appendChild(el("text", { "class": "label", x: lx + off, y: ly, "text-anchor": anchor }, fmt(q0, 0) + " gpm, " + fmt(res.ecd_ppg, 2) + " ppg"));
+    var hl = el("line", { "class": "hover-line", x1: 0, x2: 0, y1: T, y2: H - B, visibility: "hidden" });
+    var hd = el("circle", { "class": "hover-dot", cx: 0, cy: 0, r: 4, visibility: "hidden" });
+    svg.appendChild(hl); svg.appendChild(hd);
+    svg.appendChild(el("rect", { x: L, y: T, width: W - L - R, height: H - T - B, fill: "transparent", id: "hit" }));
+    chartState = { sweep: sweep, X: X, Y: Y, L: L, R: R, W: W, hl: hl, hd: hd };
+    $("sweep-range").textContent = "0 to " + fmt(xmax, 0) + " gpm";
+    var dn = $("dip-notes"); dn.textContent = "";
+    sweepDips(sweep).forEach(function (d) {
+      var li = document.createElement("li");
+      li.textContent = "Computed ECD falls from " + fmt(d.ecd_from, 2) + " to " + fmt(d.ecd_to, 2) + " ppg as rate rises from " +
+        fmt(d.q_from, 0) + " to " + fmt(d.q_to, 0) + " gpm. This is an artifact of the 1995 transitional-flow blend, not a real ECD reduction. Do not raise rate to lower ECD on the strength of this curve.";
+      dn.appendChild(li);
+    });
+  }
+
+  function onChartMove(ev) {
+    if (!chartState) return;
+    var svg = $("chart"), rect = svg.getBoundingClientRect();
+    var sx = (ev.clientX - rect.left) * chartState.W / rect.width;
+    var s = chartState.sweep, best = s[0], bd = Infinity;
+    s.forEach(function (p) { var dd = Math.abs(chartState.X(p.q_gpm) - sx); if (dd < bd) { bd = dd; best = p; } });
+    var x = chartState.X(best.q_gpm), y = chartState.Y(best.ecd_ppg);
+    chartState.hl.setAttribute("x1", x); chartState.hl.setAttribute("x2", x); chartState.hl.setAttribute("visibility", "visible");
+    chartState.hd.setAttribute("cx", x); chartState.hd.setAttribute("cy", y); chartState.hd.setAttribute("visibility", "visible");
+    var tip = $("tip");
+    tip.textContent = fmt(best.q_gpm, 0) + " gpm   ECD " + fmt(best.ecd_ppg, 3) + " ppg   APL " + fmt(best.apl_psi, 0) + " psi" + (best.transitional ? "   (transitional)" : "");
+    tip.style.display = "block";
+    var px = x * rect.width / chartState.W, py = y * rect.height / 300;
+    var tw = tip.offsetWidth;
+    var left = px + 12; if (left + tw > rect.width) left = px - tw - 12; if (left < 0) left = 0;
+    tip.style.left = left + "px"; tip.style.top = Math.max(0, py - 34) + "px";
+  }
+  function onChartLeave() {
+    if (!chartState) return;
+    chartState.hl.setAttribute("visibility", "hidden"); chartState.hd.setAttribute("visibility", "hidden");
+    $("tip").style.display = "none";
+  }
+
+  function recompute() {
+    var status = $("status");
+    var c = readCase();
+    try {
+      var res = evaluate(c);
+      lastResult = res;
+      $("copy-csv").disabled = false;
+      status.textContent = ""; status.className = "status";
+      $("results").classList.remove("hidden");
+      renderResult(res);
+      renderChart(c, res);
+    } catch (e) {
+      if (e && e.name === "InputError") {
+        status.textContent = e.message; status.className = "status bad";
+      } else {
+        status.textContent = "Could not compute with these inputs. Check every field."; status.className = "status bad";
+      }
+      lastResult = null;
+      $("copy-csv").disabled = true;
+      $("results").classList.add("hidden");
+    }
+  }
+
+  function copyCsv() {
+    if (!lastResult) return;
+    var text = resultsCsv(lastResult);
+    var fb = $("csv-fallback");
+    function fallback() { fb.classList.remove("hidden"); $("csv-text").value = text; $("csv-text").focus(); $("csv-text").select(); }
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) { fallback(); return; }
+      navigator.clipboard.writeText(text).then(function () {
+        fb.classList.add("hidden");
+        var b = $("copy-csv"), old = b.textContent; b.textContent = "Copied"; setTimeout(function () { b.textContent = old; }, 1400);
+      }).catch(fallback);
+    } catch (e) { fallback(); }
+  }
+
+  function onFile(ev) {
+    var f = ev.target.files && ev.target.files[0];
+    var status = $("status");
+    if (!f) return;
+    if (f.size > MAX_BYTES) { status.textContent = "File is larger than 5 MB. Use a smaller section table."; status.className = "status bad"; ev.target.value = ""; return; }
+    var reader = new FileReader();
+    reader.addEventListener("load", function () {
+      try {
+        var text = String(reader.result).replace(/^﻿/, "");
+        var secs = parseSectionsText(text);
+        if (secs.length > 200) throw InputError("File has " + secs.length + " sections; at most 200 are supported.");
+        setSections(secs); markEdited(); recompute();
+      } catch (e) {
+        status.textContent = (e && e.name === "InputError") ? e.message : "Could not read that file."; status.className = "status bad";
+      }
+      ev.target.value = "";
+    });
+    reader.addEventListener("error", function () { status.textContent = "Could not read that file."; status.className = "status bad"; });
+    reader.readAsText(f);
+  }
+
+  document.addEventListener("input", function (ev) {
+    var t = ev.target;
+    if (t && t.tagName === "INPUT" && t.type !== "file" && t.type !== "radio") { markEdited(); recompute(); }
+  });
+  $("rh-fann").addEventListener("change", function () { syncRheoMode(); markEdited(); recompute(); });
+  $("rh-pvyp").addEventListener("change", function () { syncRheoMode(); markEdited(); recompute(); });
+  $("add-row").addEventListener("click", function () { addRow({ name: "", hole_id_in: "8.5", pipe_od_in: "5", length_ft: "1000" }); markEdited(); recompute(); });
+  $("load-example").addEventListener("click", loadExample);
+  $("copy-csv").addEventListener("click", copyCsv);
+  $("sec-file").addEventListener("change", onFile);
+  $("chart").addEventListener("pointermove", onChartMove);
+  $("chart").addEventListener("pointerleave", onChartLeave);
+
+  loadExample();
+})();
+</script>
+</body>
+</html>

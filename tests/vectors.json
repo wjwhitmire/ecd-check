@@ -1,0 +1,3036 @@
+{
+ "cases": [
+  {
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "example",
+   "result": {
+    "apl_psi": 364.6183614261606,
+    "bhcp_psi": 5358.698361426162,
+    "ecd_ppg": 10.515499139376297,
+    "esd_ppg": 9.8,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 4994.080000000001,
+    "inputs": {
+     "flow_rate_gpm": 550.0,
+     "mud_weight_ppg": 9.8,
+     "tvd_ft": 9800.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus)."
+    ],
+    "rheology": {
+     "K": 14.449728467348905,
+     "basis": "fann_100_3",
+     "n": 0.34918164849676164,
+     "readings": {
+      "3": 5.0,
+      "6": 6.0,
+      "100": 17.0,
+      "200": 25.0,
+      "300": 33.0,
+      "600": 52.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 167.5632471853992,
+      "f": 0.010283988825046008,
+      "grad_psi_ft": 0.018213396433195566,
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "mu_ea_cp": 63.20742461323889,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0,
+      "re": 2333.7248229548354,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 158.80912197761512,
+      "va_fpm": 253.76374282673086,
+      "va_fps": 4.229395713778848
+     },
+     {
+      "dp_psi": 30.037005271484063,
+      "f": 0.008768321974493436,
+      "grad_psi_ft": 0.02145500376534576,
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "mu_ea_cp": 55.22915302675479,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0,
+      "re": 2737.125765889377,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 195.39591836734692,
+      "va_fpm": 284.95238095238096,
+      "va_fps": 4.749206349206349
+     },
+     {
+      "dp_psi": 147.29206776696574,
+      "f": 0.009802646367203885,
+      "grad_psi_ft": 0.0173284785608195,
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "mu_ea_cp": 64.11883842998121,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5,
+      "re": 2448.318454116159,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 155.35384615384615,
+      "va_fpm": 258.9230769230769,
+      "va_fps": 4.315384615384615
+     },
+     {
+      "dp_psi": 19.726041202311585,
+      "f": 0.004592529574126235,
+      "grad_psi_ft": 0.07045014715111281,
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "mu_ea_cp": 24.254284150279634,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75,
+      "re": 5517.45245676889,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "turbulent",
+      "shear_rate": 691.893743726999,
+      "va_fpm": 504.5058548009368,
+      "va_fps": 8.408430913348946
+     }
+    ],
+    "total_md_ft": 19380.0,
+    "warnings": []
+   },
+   "sweep": [
+    {
+     "apl_psi": 0.0,
+     "ecd_ppg": 9.8,
+     "q_gpm": 0.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 115.52420864263168,
+     "ecd_ppg": 10.026695856834051,
+     "q_gpm": 20.625,
+     "transitional": false
+    },
+    {
+     "apl_psi": 147.1591099140932,
+     "ecd_ppg": 10.088773763567687,
+     "q_gpm": 41.25,
+     "transitional": false
+    },
+    {
+     "apl_psi": 169.5410968378813,
+     "ecd_ppg": 10.13269446004294,
+     "q_gpm": 61.875,
+     "transitional": false
+    },
+    {
+     "apl_psi": 187.4568446315811,
+     "ecd_ppg": 10.167850951003889,
+     "q_gpm": 82.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 202.6471501488807,
+     "ecd_ppg": 10.197659242835323,
+     "q_gpm": 103.125,
+     "transitional": false
+    },
+    {
+     "apl_psi": 215.9678668018559,
+     "ecd_ppg": 10.223798796706939,
+     "q_gpm": 123.75,
+     "transitional": false
+    },
+    {
+     "apl_psi": 227.9112321137578,
+     "ecd_ppg": 10.247235541824486,
+     "q_gpm": 144.375,
+     "transitional": false
+    },
+    {
+     "apl_psi": 238.78962450739468,
+     "ecd_ppg": 10.268582465673852,
+     "q_gpm": 165.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 248.8152384225416,
+     "ecd_ppg": 10.288255962367625,
+     "q_gpm": 185.625,
+     "transitional": false
+    },
+    {
+     "apl_psi": 258.1396106749175,
+     "ecd_ppg": 10.306553396143872,
+     "q_gpm": 206.25,
+     "transitional": false
+    },
+    {
+     "apl_psi": 266.87519933756903,
+     "ecd_ppg": 10.32369544610983,
+     "q_gpm": 226.875,
+     "transitional": false
+    },
+    {
+     "apl_psi": 275.1080437773996,
+     "ecd_ppg": 10.339850949327708,
+     "q_gpm": 247.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 282.90562220627794,
+     "ecd_ppg": 10.355152319871033,
+     "q_gpm": 268.125,
+     "transitional": false
+    },
+    {
+     "apl_psi": 290.3219546046557,
+     "ecd_ppg": 10.36970556241102,
+     "q_gpm": 288.75,
+     "transitional": false
+    },
+    {
+     "apl_psi": 297.4010426991434,
+     "ecd_ppg": 10.38359702256504,
+     "q_gpm": 309.375,
+     "transitional": false
+    },
+    {
+     "apl_psi": 304.17926261613934,
+     "ecd_ppg": 10.39689808205679,
+     "q_gpm": 330.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 310.6870739863088,
+     "ecd_ppg": 10.409668512532004,
+     "q_gpm": 350.625,
+     "transitional": false
+    },
+    {
+     "apl_psi": 316.95026912144533,
+     "ecd_ppg": 10.42195892684742,
+     "q_gpm": 371.25,
+     "transitional": false
+    },
+    {
+     "apl_psi": 322.63138159805607,
+     "ecd_ppg": 10.43310710674658,
+     "q_gpm": 391.875,
+     "transitional": true
+    },
+    {
+     "apl_psi": 327.52200654615285,
+     "ecd_ppg": 10.442704094478323,
+     "q_gpm": 412.5,
+     "transitional": true
+    },
+    {
+     "apl_psi": 331.74547426202815,
+     "ecd_ppg": 10.450991903967873,
+     "q_gpm": 433.125,
+     "transitional": true
+    },
+    {
+     "apl_psi": 337.3258283671175,
+     "ecd_ppg": 10.461942363357768,
+     "q_gpm": 453.75,
+     "transitional": false
+    },
+    {
+     "apl_psi": 343.3792176106244,
+     "ecd_ppg": 10.473821070664492,
+     "q_gpm": 474.375,
+     "transitional": false
+    },
+    {
+     "apl_psi": 349.31306407600863,
+     "ecd_ppg": 10.485465196381494,
+     "q_gpm": 495.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 355.1364621596583,
+     "ecd_ppg": 10.496892586655532,
+     "q_gpm": 515.625,
+     "transitional": false
+    },
+    {
+     "apl_psi": 360.85753353484074,
+     "ecd_ppg": 10.508119178836031,
+     "q_gpm": 536.25,
+     "transitional": false
+    },
+    {
+     "apl_psi": 366.4835633285454,
+     "ecd_ppg": 10.519159268698088,
+     "q_gpm": 556.875,
+     "transitional": false
+    },
+    {
+     "apl_psi": 372.02111299086334,
+     "ecd_ppg": 10.530025731928696,
+     "q_gpm": 577.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 376.85119059890997,
+     "ecd_ppg": 10.539503906198803,
+     "q_gpm": 598.125,
+     "transitional": true
+    },
+    {
+     "apl_psi": 381.18862759271826,
+     "ecd_ppg": 10.548015360268286,
+     "q_gpm": 618.75,
+     "transitional": true
+    },
+    {
+     "apl_psi": 382.04614670204165,
+     "ecd_ppg": 10.549698090074651,
+     "q_gpm": 639.375,
+     "transitional": true
+    },
+    {
+     "apl_psi": 376.82932291607125,
+     "ecd_ppg": 10.539460994733265,
+     "q_gpm": 660.0,
+     "transitional": true
+    },
+    {
+     "apl_psi": 369.5754641647771,
+     "ecd_ppg": 10.525226578031353,
+     "q_gpm": 680.625,
+     "transitional": true
+    },
+    {
+     "apl_psi": 360.2804831603107,
+     "ecd_ppg": 10.506986819388366,
+     "q_gpm": 701.25,
+     "transitional": true
+    },
+    {
+     "apl_psi": 350.8141601810889,
+     "ecd_ppg": 10.488410832380474,
+     "q_gpm": 721.875,
+     "transitional": true
+    },
+    {
+     "apl_psi": 353.3403522384129,
+     "ecd_ppg": 10.493368038144453,
+     "q_gpm": 742.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 367.95823534169097,
+     "ecd_ppg": 10.522053052083383,
+     "q_gpm": 763.125,
+     "transitional": false
+    },
+    {
+     "apl_psi": 382.7668219946886,
+     "ecd_ppg": 10.551112288058652,
+     "q_gpm": 783.75,
+     "transitional": false
+    },
+    {
+     "apl_psi": 397.7634830558513,
+     "ecd_ppg": 10.580540586844293,
+     "q_gpm": 804.375,
+     "transitional": false
+    },
+    {
+     "apl_psi": 412.94569255479547,
+     "ecd_ppg": 10.610332991669537,
+     "q_gpm": 825.0,
+     "transitional": false
+    }
+   ],
+   "sweep_dips": [
+    {
+     "ecd_from": 10.549698090074651,
+     "ecd_to": 10.488410832380474,
+     "q_from": 639.375,
+     "q_to": 721.875
+    }
+   ]
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 0,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "example_zero_flow",
+   "result": {
+    "apl_psi": 0.0,
+    "bhcp_psi": 4994.080000000001,
+    "ecd_ppg": 9.8,
+    "esd_ppg": 9.8,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 4994.080000000001,
+    "inputs": {
+     "flow_rate_gpm": 0.0,
+     "mud_weight_ppg": 9.8,
+     "tvd_ft": 9800.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus)."
+    ],
+    "rheology": {
+     "K": 14.449728467348905,
+     "basis": "fann_100_3",
+     "n": 0.34918164849676164,
+     "readings": {
+      "3": 5.0,
+      "6": 6.0,
+      "100": 17.0,
+      "200": 25.0,
+      "300": 33.0,
+      "600": 52.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 0.0,
+      "f": null,
+      "grad_psi_ft": 0.0,
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "mu_ea_cp": null,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0,
+      "re": 0.0,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "no flow",
+      "shear_rate": 0.0,
+      "va_fpm": 0.0,
+      "va_fps": 0.0
+     },
+     {
+      "dp_psi": 0.0,
+      "f": null,
+      "grad_psi_ft": 0.0,
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "mu_ea_cp": null,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0,
+      "re": 0.0,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "no flow",
+      "shear_rate": 0.0,
+      "va_fpm": 0.0,
+      "va_fps": 0.0
+     },
+     {
+      "dp_psi": 0.0,
+      "f": null,
+      "grad_psi_ft": 0.0,
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "mu_ea_cp": null,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5,
+      "re": 0.0,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "no flow",
+      "shear_rate": 0.0,
+      "va_fpm": 0.0,
+      "va_fps": 0.0
+     },
+     {
+      "dp_psi": 0.0,
+      "f": null,
+      "grad_psi_ft": 0.0,
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "mu_ea_cp": null,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75,
+      "re": 0.0,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "no flow",
+      "shear_rate": 0.0,
+      "va_fpm": 0.0,
+      "va_fps": 0.0
+     }
+    ],
+    "total_md_ft": 19380.0,
+    "warnings": []
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "pv_cp": 19,
+     "yp": 14
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "example_pv_yp",
+   "result": {
+    "apl_psi": 344.13077080241595,
+    "bhcp_psi": 5338.210770802417,
+    "ecd_ppg": 10.475295861072246,
+    "esd_ppg": 9.8,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 4994.080000000001,
+    "inputs": {
+     "flow_rate_gpm": 550.0,
+     "mud_weight_ppg": 9.8,
+     "tvd_ft": 9800.0
+    },
+    "notes": [
+     "PV/YP converted to dial readings: R600 = 2 PV + YP = 52, R300 = PV + YP = 33.",
+     "100/3 rpm readings not available (missing 100, 3 rpm). Annular n and K use the 600/300 rpm power law; low-shear behavior is not represented.",
+     "Transitional flow in: Casing 8.835 in ID x 5 in DP; Open hole 8.5 in x 5 in DP (curve); Open hole 8.5 in x 4.5 in DP (lateral). The 1995 transition friction factor is a straight-line blend; pressure loss can fall as rate rises across this band. Treat ECD here as uncertain."
+    ],
+    "rheology": {
+     "K": 2.825651105650378,
+     "basis": "fallback_600_300",
+     "n": 0.6556648204729466,
+     "readings": {
+      "300": 33.0,
+      "600": 52.0
+     },
+     "source": "pv_yp"
+    },
+    "sections": [
+     {
+      "dp_psi": 148.7502441457859,
+      "f": 0.00912936383254468,
+      "grad_psi_ft": 0.01616850479845499,
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "mu_ea_cp": 54.854814947944526,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0,
+      "re": 2689.0754431483024,
+      "re_c1": 2571.7391959520633,
+      "re_c2": 3371.7391959520633,
+      "regime": "transitional",
+      "shear_rate": 158.80912197761512,
+      "va_fpm": 253.76374282673086,
+      "va_fps": 4.229395713778848
+     },
+     {
+      "dp_psi": 29.670982201325593,
+      "f": 0.008661473502076349,
+      "grad_psi_ft": 0.021193558715232565,
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "mu_ea_cp": 51.07528515470454,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0,
+      "re": 2959.7316455482114,
+      "re_c1": 2571.7391959520633,
+      "re_c2": 3371.7391959520633,
+      "regime": "transitional",
+      "shear_rate": 195.39591836734692,
+      "va_fpm": 284.95238095238096,
+      "va_fps": 4.749206349206349
+     },
+     {
+      "dp_psi": 133.24992683060594,
+      "f": 0.008868107637967278,
+      "grad_psi_ft": 0.015676461980071287,
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "mu_ea_cp": 55.271892885857675,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5,
+      "re": 2840.2019035027915,
+      "re_c1": 2571.7391959520633,
+      "re_c2": 3371.7391959520633,
+      "regime": "transitional",
+      "shear_rate": 155.35384615384615,
+      "va_fpm": 258.9230769230769,
+      "va_fps": 4.315384615384615
+     },
+     {
+      "dp_psi": 32.4596176246985,
+      "f": 0.007557104457877142,
+      "grad_psi_ft": 0.11592720580249465,
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "mu_ea_cp": 33.04670150902452,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75,
+      "re": 4049.477060080763,
+      "re_c1": 2571.7391959520633,
+      "re_c2": 3371.7391959520633,
+      "regime": "turbulent",
+      "shear_rate": 691.893743726999,
+      "va_fpm": 504.5058548009368,
+      "va_fps": 8.408430913348946
+     }
+    ],
+    "total_md_ft": 19380.0,
+    "warnings": []
+   },
+   "sweep": [
+    {
+     "apl_psi": 0.0,
+     "ecd_ppg": 9.8,
+     "q_gpm": 0.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 37.82325304182853,
+     "ecd_ppg": 9.874221454163715,
+     "q_gpm": 20.625,
+     "transitional": false
+    },
+    {
+     "apl_psi": 59.58454897241913,
+     "ecd_ppg": 9.916924154184496,
+     "q_gpm": 41.25,
+     "transitional": false
+    },
+    {
+     "apl_psi": 77.73032795178915,
+     "ecd_ppg": 9.952532040721723,
+     "q_gpm": 61.875,
+     "transitional": false
+    },
+    {
+     "apl_psi": 93.86602660327328,
+     "ecd_ppg": 9.984195499613959,
+     "q_gpm": 82.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 108.65480097418742,
+     "ecd_ppg": 10.01321585748467,
+     "q_gpm": 103.125,
+     "transitional": false
+    },
+    {
+     "apl_psi": 122.45182949662208,
+     "ecd_ppg": 10.040290089279086,
+     "q_gpm": 123.75,
+     "transitional": false
+    },
+    {
+     "apl_psi": 135.4752412017584,
+     "ecd_ppg": 10.065846234697329,
+     "q_gpm": 144.375,
+     "transitional": false
+    },
+    {
+     "apl_psi": 147.8710689639494,
+     "ecd_ppg": 10.09017085746458,
+     "q_gpm": 165.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 159.74310503675807,
+     "ecd_ppg": 10.113467631547799,
+     "q_gpm": 185.625,
+     "transitional": false
+    },
+    {
+     "apl_psi": 171.16844240169405,
+     "ecd_ppg": 10.135887838307877,
+     "q_gpm": 206.25,
+     "transitional": false
+    },
+    {
+     "apl_psi": 182.20631553595473,
+     "ecd_ppg": 10.157547714944966,
+     "q_gpm": 226.875,
+     "transitional": false
+    },
+    {
+     "apl_psi": 192.9034772163814,
+     "ecd_ppg": 10.178539005526652,
+     "q_gpm": 247.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 203.29764431087025,
+     "ecd_ppg": 10.198935722745036,
+     "q_gpm": 268.125,
+     "transitional": false
+    },
+    {
+     "apl_psi": 213.41980117388184,
+     "ecd_ppg": 10.21879866792363,
+     "q_gpm": 288.75,
+     "transitional": false
+    },
+    {
+     "apl_psi": 223.29579383137235,
+     "ecd_ppg": 10.23817855932373,
+     "q_gpm": 309.375,
+     "transitional": false
+    },
+    {
+     "apl_psi": 232.94746595546815,
+     "ecd_ppg": 10.25711826129409,
+     "q_gpm": 330.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 242.393488672247,
+     "ecd_ppg": 10.27565441262215,
+     "q_gpm": 350.625,
+     "transitional": false
+    },
+    {
+     "apl_psi": 251.6499798296793,
+     "ecd_ppg": 10.29381864173799,
+     "q_gpm": 371.25,
+     "transitional": false
+    },
+    {
+     "apl_psi": 260.73097484007155,
+     "ecd_ppg": 10.311638490659481,
+     "q_gpm": 391.875,
+     "transitional": false
+    },
+    {
+     "apl_psi": 270.3681652864344,
+     "ecd_ppg": 10.330549774894887,
+     "q_gpm": 412.5,
+     "transitional": true
+    },
+    {
+     "apl_psi": 279.8242622787458,
+     "ecd_ppg": 10.34910569520947,
+     "q_gpm": 433.125,
+     "transitional": true
+    },
+    {
+     "apl_psi": 289.07486002317506,
+     "ecd_ppg": 10.367258359543122,
+     "q_gpm": 453.75,
+     "transitional": true
+    },
+    {
+     "apl_psi": 298.1124179643236,
+     "ecd_ppg": 10.384992970887605,
+     "q_gpm": 474.375,
+     "transitional": true
+    },
+    {
+     "apl_psi": 307.47271782923633,
+     "ecd_ppg": 10.403360906258314,
+     "q_gpm": 495.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 318.47712521139624,
+     "ecd_ppg": 10.424955112267261,
+     "q_gpm": 515.625,
+     "transitional": true
+    },
+    {
+     "apl_psi": 332.7446073932275,
+     "ecd_ppg": 10.452952526281845,
+     "q_gpm": 536.25,
+     "transitional": true
+    },
+    {
+     "apl_psi": 349.75081027047827,
+     "ecd_ppg": 10.486324195978176,
+     "q_gpm": 556.875,
+     "transitional": true
+    },
+    {
+     "apl_psi": 366.277076607549,
+     "ecd_ppg": 10.518754074975568,
+     "q_gpm": 577.5,
+     "transitional": true
+    },
+    {
+     "apl_psi": 382.22894959632316,
+     "ecd_ppg": 10.550056808470023,
+     "q_gpm": 598.125,
+     "transitional": true
+    },
+    {
+     "apl_psi": 397.9631005603317,
+     "ecd_ppg": 10.580932300942568,
+     "q_gpm": 618.75,
+     "transitional": true
+    },
+    {
+     "apl_psi": 415.6578171684188,
+     "ecd_ppg": 10.615655057237872,
+     "q_gpm": 639.375,
+     "transitional": true
+    },
+    {
+     "apl_psi": 435.7526212291019,
+     "ecd_ppg": 10.655087561281597,
+     "q_gpm": 660.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 458.1482486479707,
+     "ecd_ppg": 10.699035024819409,
+     "q_gpm": 680.625,
+     "transitional": false
+    },
+    {
+     "apl_psi": 480.97468980135994,
+     "ecd_ppg": 10.74382788422559,
+     "q_gpm": 701.25,
+     "transitional": false
+    },
+    {
+     "apl_psi": 504.2271949126022,
+     "ecd_ppg": 10.78945681890228,
+     "q_gpm": 721.875,
+     "transitional": false
+    },
+    {
+     "apl_psi": 527.9012020692602,
+     "ecd_ppg": 10.835912876902002,
+     "q_gpm": 742.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 551.9923247321597,
+     "ecd_ppg": 10.883187450416326,
+     "q_gpm": 763.125,
+     "transitional": false
+    },
+    {
+     "apl_psi": 576.4963403931603,
+     "ecd_ppg": 10.931272253518761,
+     "q_gpm": 783.75,
+     "transitional": false
+    },
+    {
+     "apl_psi": 601.4091802482973,
+     "ecd_ppg": 10.980159301900112,
+     "q_gpm": 804.375,
+     "transitional": false
+    },
+    {
+     "apl_psi": 626.7269197714711,
+     "ecd_ppg": 11.02984089437102,
+     "q_gpm": 825.0,
+     "transitional": false
+    }
+   ],
+   "sweep_dips": []
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "300": 33,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "example_fann_600_300_only",
+   "result": {
+    "apl_psi": 344.13077080241595,
+    "bhcp_psi": 5338.210770802417,
+    "ecd_ppg": 10.475295861072246,
+    "esd_ppg": 9.8,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 4994.080000000001,
+    "inputs": {
+     "flow_rate_gpm": 550.0,
+     "mud_weight_ppg": 9.8,
+     "tvd_ft": 9800.0
+    },
+    "notes": [
+     "100/3 rpm readings not available (missing 100, 3 rpm). Annular n and K use the 600/300 rpm power law; low-shear behavior is not represented.",
+     "Transitional flow in: Casing 8.835 in ID x 5 in DP; Open hole 8.5 in x 5 in DP (curve); Open hole 8.5 in x 4.5 in DP (lateral). The 1995 transition friction factor is a straight-line blend; pressure loss can fall as rate rises across this band. Treat ECD here as uncertain."
+    ],
+    "rheology": {
+     "K": 2.825651105650378,
+     "basis": "fallback_600_300",
+     "n": 0.6556648204729466,
+     "readings": {
+      "300": 33.0,
+      "600": 52.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 148.7502441457859,
+      "f": 0.00912936383254468,
+      "grad_psi_ft": 0.01616850479845499,
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "mu_ea_cp": 54.854814947944526,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0,
+      "re": 2689.0754431483024,
+      "re_c1": 2571.7391959520633,
+      "re_c2": 3371.7391959520633,
+      "regime": "transitional",
+      "shear_rate": 158.80912197761512,
+      "va_fpm": 253.76374282673086,
+      "va_fps": 4.229395713778848
+     },
+     {
+      "dp_psi": 29.670982201325593,
+      "f": 0.008661473502076349,
+      "grad_psi_ft": 0.021193558715232565,
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "mu_ea_cp": 51.07528515470454,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0,
+      "re": 2959.7316455482114,
+      "re_c1": 2571.7391959520633,
+      "re_c2": 3371.7391959520633,
+      "regime": "transitional",
+      "shear_rate": 195.39591836734692,
+      "va_fpm": 284.95238095238096,
+      "va_fps": 4.749206349206349
+     },
+     {
+      "dp_psi": 133.24992683060594,
+      "f": 0.008868107637967278,
+      "grad_psi_ft": 0.015676461980071287,
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "mu_ea_cp": 55.271892885857675,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5,
+      "re": 2840.2019035027915,
+      "re_c1": 2571.7391959520633,
+      "re_c2": 3371.7391959520633,
+      "regime": "transitional",
+      "shear_rate": 155.35384615384615,
+      "va_fpm": 258.9230769230769,
+      "va_fps": 4.315384615384615
+     },
+     {
+      "dp_psi": 32.4596176246985,
+      "f": 0.007557104457877142,
+      "grad_psi_ft": 0.11592720580249465,
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "mu_ea_cp": 33.04670150902452,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75,
+      "re": 4049.477060080763,
+      "re_c1": 2571.7391959520633,
+      "re_c2": 3371.7391959520633,
+      "regime": "turbulent",
+      "shear_rate": 691.893743726999,
+      "va_fpm": 504.5058548009368,
+      "va_fps": 8.408430913348946
+     }
+    ],
+    "total_md_ft": 19380.0,
+    "warnings": []
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 300,
+    "mud_weight_ppg": 10.0,
+    "rheology": {
+     "fann": {
+      "100": 20,
+      "3": 5,
+      "300": 35,
+      "600": 50
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1000,
+      "name": "S1",
+      "pipe_od_in": 5.0
+     }
+    ],
+    "tvd_ft": 1000
+   },
+   "name": "laminar_hand",
+   "result": {
+    "apl_psi": 19.870479930022743,
+    "bhcp_psi": 539.8704799300227,
+    "ecd_ppg": 10.382124614038899,
+    "esd_ppg": 10.0,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 520.0,
+    "inputs": {
+     "flow_rate_gpm": 300.0,
+     "mud_weight_ppg": 10.0,
+     "tvd_ft": 1000.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus)."
+    ],
+    "rheology": {
+     "K": 13.396372848822718,
+     "basis": "fann_100_3",
+     "n": 0.3955534143024713,
+     "readings": {
+      "3": 5.0,
+      "100": 20.0,
+      "300": 35.0,
+      "600": 50.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 19.870479930022743,
+      "f": 0.026748854947524627,
+      "grad_psi_ft": 0.019870479930022743,
+      "hole_id_in": 8.5,
+      "length_ft": 1000.0,
+      "mu_ea_cp": 93.775541256033,
+      "name": "S1",
+      "pipe_od_in": 5.0,
+      "re": 897.2346684403024,
+      "re_c1": 2928.091822405614,
+      "re_c2": 3728.091822405614,
+      "regime": "laminar",
+      "shear_rate": 106.57959183673468,
+      "va_fpm": 155.42857142857142,
+      "va_fps": 2.59047619047619
+     }
+    ],
+    "total_md_ft": 1000.0,
+    "warnings": []
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 500,
+    "mud_weight_ppg": 12.0,
+    "rheology": {
+     "fann": {
+      "100": 10,
+      "3": 2,
+      "300": 18,
+      "600": 30
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 6.276,
+      "length_ft": 1000,
+      "name": "S1",
+      "pipe_od_in": 5.0
+     }
+    ],
+    "tvd_ft": 1000
+   },
+   "name": "turbulent_hand",
+   "result": {
+    "apl_psi": 276.969289768584,
+    "bhcp_psi": 900.9692897685841,
+    "ecd_ppg": 17.326332495549693,
+    "esd_ppg": 12.0,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 624.0,
+    "inputs": {
+     "flow_rate_gpm": 500.0,
+     "mud_weight_ppg": 12.0,
+     "tvd_ft": 1000.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus)."
+    ],
+    "rheology": {
+     "K": 4.829612720675571,
+     "basis": "fann_100_3",
+     "n": 0.4592232928487644,
+     "readings": {
+      "3": 2.0,
+      "100": 10.0,
+      "300": 18.0,
+      "600": 30.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 276.969289768584,
+      "f": 0.0037812918492472684,
+      "grad_psi_ft": 0.27696928976858404,
+      "hole_id_in": 6.276,
+      "length_ft": 1000.0,
+      "mu_ea_cp": 10.40467353739849,
+      "name": "S1",
+      "pipe_od_in": 5.0,
+      "re": 19363.143516379743,
+      "re_c1": 2840.864088797193,
+      "re_c2": 3640.864088797193,
+      "regime": "turbulent",
+      "shear_rate": 1600.0599084739945,
+      "va_fpm": 850.6985180053402,
+      "va_fps": 14.178308633422338
+     }
+    ],
+    "total_md_ft": 1000.0,
+    "warnings": [
+     {
+      "code": "ecd_large_rise",
+      "message": "Annular friction adds 5.33 ppg to the mud weight, more than 2 ppg. That is unusual for a drilling annulus; check the flow rate and the annulus sizes."
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 600,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "3": 5,
+      "300": 33,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 10000,
+      "name": "S1",
+      "pipe_od_in": 5.0
+     }
+    ],
+    "tvd_ft": 9800
+   },
+   "name": "transitional",
+   "result": {
+    "apl_psi": 216.131297630583,
+    "bhcp_psi": 5210.211297630583,
+    "ecd_ppg": 10.224119500844944,
+    "esd_ppg": 9.8,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 4994.080000000001,
+    "inputs": {
+     "flow_rate_gpm": 600.0,
+     "mud_weight_ppg": 9.8,
+     "tvd_ft": 9800.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus).",
+     "Transitional flow in: S1. The 1995 transition friction factor is a straight-line blend; pressure loss can fall as rate rises across this band. Treat ECD here as uncertain."
+    ],
+    "rheology": {
+     "K": 14.449728467348905,
+     "basis": "fann_100_3",
+     "n": 0.34918164849676164,
+     "readings": {
+      "3": 5.0,
+      "100": 17.0,
+      "300": 33.0,
+      "600": 52.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 216.131297630583,
+      "f": 0.0074221278816673395,
+      "grad_psi_ft": 0.0216131297630583,
+      "hole_id_in": 8.5,
+      "length_ft": 10000.0,
+      "mu_ea_cp": 52.18850956997257,
+      "name": "S1",
+      "pipe_od_in": 5.0,
+      "re": 3159.92520241565,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "transitional",
+      "shear_rate": 213.15918367346936,
+      "va_fpm": 310.85714285714283,
+      "va_fps": 5.18095238095238
+     }
+    ],
+    "total_md_ft": 10000.0,
+    "warnings": []
+   },
+   "sweep": [
+    {
+     "apl_psi": 0.0,
+     "ecd_ppg": 9.8,
+     "q_gpm": 0.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 70.27511329488892,
+     "ecd_ppg": 9.937902498616344,
+     "q_gpm": 22.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 89.51909944329681,
+     "ecd_ppg": 9.97566542276942,
+     "q_gpm": 45.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 103.13439865473404,
+     "ecd_ppg": 10.002383042886057,
+     "q_gpm": 67.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 114.03281744295231,
+     "ecd_ppg": 10.023769264997945,
+     "q_gpm": 90.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 123.273308711016,
+     "ecd_ppg": 10.041902097156626,
+     "q_gpm": 112.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 131.3765009592553,
+     "ecd_ppg": 10.057803180846264,
+     "q_gpm": 135.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 138.64182967500997,
+     "ecd_ppg": 10.07206010532773,
+     "q_gpm": 157.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 145.2593193502171,
+     "ecd_ppg": 10.085045760106393,
+     "q_gpm": 180.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 151.3580510534332,
+     "ecd_ppg": 10.097013443982405,
+     "q_gpm": 202.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 157.03020690837167,
+     "ecd_ppg": 10.10814404809335,
+     "q_gpm": 225.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 162.3441968519378,
+     "ecd_ppg": 10.11857181485859,
+     "q_gpm": 247.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 167.3523599248228,
+     "ecd_ppg": 10.128399450401929,
+     "q_gpm": 270.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 172.09574413799962,
+     "ecd_ppg": 10.137707504195447,
+     "q_gpm": 292.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 176.60721065789426,
+     "ecd_ppg": 10.146560460474676,
+     "q_gpm": 315.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 180.91352639647303,
+     "ecd_ppg": 10.155010844577067,
+     "q_gpm": 337.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 185.03681949842442,
+     "ecd_ppg": 10.163102079078541,
+     "q_gpm": 360.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 188.99561901511433,
+     "ecd_ppg": 10.170870523970006,
+     "q_gpm": 382.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 192.8056147976544,
+     "ecd_ppg": 10.178346967813294,
+     "q_gpm": 405.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 196.48022411324908,
+     "ecd_ppg": 10.185557739625686,
+     "q_gpm": 427.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 200.0310216341461,
+     "ecd_ppg": 10.192525552657273,
+     "q_gpm": 450.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 203.46807086491245,
+     "ecd_ppg": 10.199270154758462,
+     "q_gpm": 472.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 206.800183175055,
+     "ecd_ppg": 10.205808836685744,
+     "q_gpm": 495.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 210.03512279271732,
+     "ecd_ppg": 10.212156834365615,
+     "q_gpm": 517.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 213.1797708716065,
+     "ecd_ppg": 10.218327650846952,
+     "q_gpm": 540.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 216.2402581521939,
+     "ecd_ppg": 10.224333316625184,
+     "q_gpm": 562.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 218.23051279167063,
+     "ecd_ppg": 10.228238839858067,
+     "q_gpm": 585.0,
+     "transitional": true
+    },
+    {
+     "apl_psi": 214.59753056437947,
+     "ecd_ppg": 10.221109753854748,
+     "q_gpm": 607.5,
+     "transitional": true
+    },
+    {
+     "apl_psi": 207.9359581848665,
+     "ecd_ppg": 10.208037594554291,
+     "q_gpm": 630.0,
+     "transitional": true
+    },
+    {
+     "apl_psi": 197.96371807024812,
+     "ecd_ppg": 10.188468834517757,
+     "q_gpm": 652.5,
+     "transitional": true
+    },
+    {
+     "apl_psi": 189.77537887808745,
+     "ecd_ppg": 10.172400664988398,
+     "q_gpm": 675.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 199.20904900239654,
+     "ecd_ppg": 10.190912576535316,
+     "q_gpm": 697.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 208.7898006971471,
+     "ecd_ppg": 10.20971310968828,
+     "q_gpm": 720.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 218.5152229218517,
+     "ecd_ppg": 10.228797533206146,
+     "q_gpm": 742.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 228.38301659285509,
+     "ecd_ppg": 10.24816133554328,
+     "q_gpm": 765.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 238.39098621932172,
+     "ecd_ppg": 10.267800208436661,
+     "q_gpm": 787.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 248.53703238701095,
+     "ecd_ppg": 10.287710032156616,
+     "q_gpm": 810.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 258.81914498256754,
+     "ecd_ppg": 10.30788686221069,
+     "q_gpm": 832.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 269.2353970671825,
+     "ecd_ppg": 10.328326917321787,
+     "q_gpm": 855.0,
+     "transitional": false
+    },
+    {
+     "apl_psi": 279.78393932181945,
+     "ecd_ppg": 10.349026568527904,
+     "q_gpm": 877.5,
+     "transitional": false
+    },
+    {
+     "apl_psi": 290.46299499729315,
+     "ecd_ppg": 10.369982329272554,
+     "q_gpm": 900.0,
+     "transitional": false
+    }
+   ],
+   "sweep_dips": [
+    {
+     "ecd_from": 10.228238839858067,
+     "ecd_to": 10.172400664988398,
+     "q_from": 585.0,
+     "q_to": 675.0
+    }
+   ]
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 400,
+    "mud_weight_ppg": 10.0,
+    "rheology": {
+     "fann": {
+      "100": 12,
+      "3": 3,
+      "300": 25,
+      "600": 40
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 500,
+      "name": "S1",
+      "pipe_od_in": 0.0
+     }
+    ],
+    "tvd_ft": 9000
+   },
+   "name": "open_hole_no_pipe",
+   "result": {
+    "apl_psi": 1.636882525044581,
+    "bhcp_psi": 4681.636882525045,
+    "ecd_ppg": 10.003497612233001,
+    "esd_ppg": 10.0,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 4680.0,
+    "inputs": {
+     "flow_rate_gpm": 400.0,
+     "mud_weight_ppg": 10.0,
+     "tvd_ft": 9000.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus).",
+     "TVD (9000 ft) exceeds total section length (500 ft). Annular loss covers only the listed sections."
+    ],
+    "rheology": {
+     "K": 8.037823709293631,
+     "basis": "fann_100_3",
+     "n": 0.3955534143024713,
+     "readings": {
+      "3": 3.0,
+      "100": 12.0,
+      "300": 25.0,
+      "600": 40.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 1.636882525044581,
+      "f": 0.01407634272281164,
+      "grad_psi_ft": 0.003273765050089162,
+      "hole_id_in": 8.5,
+      "length_ft": 500.0,
+      "mu_ea_cp": 104.50276837415362,
+      "name": "S1",
+      "pipe_od_in": 0.0,
+      "re": 1704.9883249223833,
+      "re_c1": 2928.091822405614,
+      "re_c2": 3728.091822405614,
+      "regime": "laminar",
+      "shear_rate": 38.26712802768166,
+      "va_fpm": 135.52941176470588,
+      "va_fps": 2.2588235294117647
+     }
+    ],
+    "total_md_ft": 500.0,
+    "warnings": []
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 280,
+    "mud_weight_ppg": 14.5,
+    "rheology": {
+     "fann": {
+      "100": 21,
+      "200": 32,
+      "3": 7,
+      "300": 42,
+      "6": 8,
+      "600": 70
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 6.125,
+      "length_ft": 12000,
+      "name": "S1",
+      "pipe_od_in": 4.0
+     }
+    ],
+    "tvd_ft": 11500
+   },
+   "name": "heavy_oil_mud",
+   "result": {
+    "apl_psi": 585.2632336935169,
+    "bhcp_psi": 9256.263233693517,
+    "ecd_ppg": 15.478701059688156,
+    "esd_ppg": 14.5,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 8671.0,
+    "inputs": {
+     "flow_rate_gpm": 280.0,
+     "mud_weight_ppg": 14.5,
+     "tvd_ft": 11500.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus).",
+     "Transitional flow in: S1. The 1995 transition friction factor is a straight-line blend; pressure loss can fall as rate rises across this band. Treat ECD here as uncertain."
+    ],
+    "rheology": {
+     "K": 21.443925152764475,
+     "basis": "fann_100_3",
+     "n": 0.3134686643508182,
+     "readings": {
+      "3": 7.0,
+      "6": 8.0,
+      "100": 21.0,
+      "200": 32.0,
+      "300": 42.0,
+      "600": 70.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 585.2632336935169,
+      "f": 0.006543656248113474,
+      "grad_psi_ft": 0.048771936141126404,
+      "hole_id_in": 6.125,
+      "length_ft": 12000.0,
+      "mu_ea_cp": 44.78231816066857,
+      "name": "S1",
+      "pipe_od_in": 4.0,
+      "re": 3390.2565982609913,
+      "re_c1": 3040.547929839379,
+      "re_c2": 3840.547929839379,
+      "regime": "transitional",
+      "shear_rate": 359.8054901960784,
+      "va_fpm": 318.5777777777778,
+      "va_fps": 5.3096296296296295
+     }
+    ],
+    "total_md_ft": 12000.0,
+    "warnings": []
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 300,
+    "mud_weight_ppg": 10.0,
+    "rheology": {
+     "fann": {
+      "100": 30,
+      "3": 0.5,
+      "300": 40,
+      "600": 60
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1000,
+      "name": "S1",
+      "pipe_od_in": 5.0
+     }
+    ],
+    "tvd_ft": 1000
+   },
+   "name": "shear_thickening_warn",
+   "result": {
+    "apl_psi": 16.654803084006602,
+    "bhcp_psi": 536.6548030840066,
+    "ecd_ppg": 10.320284674692434,
+    "esd_ppg": 10.0,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 520.0,
+    "inputs": {
+     "flow_rate_gpm": 300.0,
+     "mud_weight_ppg": 10.0,
+     "tvd_ft": 1000.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus).",
+     "n = 1.168 is above 1 (shear thickening). Typical drilling fluids have n < 1; check the readings."
+    ],
+    "rheology": {
+     "K": 0.379519399205325,
+     "basis": "fann_100_3",
+     "n": 1.168245371502054,
+     "readings": {
+      "3": 0.5,
+      "100": 30.0,
+      "300": 40.0,
+      "600": 60.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 16.654803084006602,
+      "f": 0.022420037837162017,
+      "grad_psi_ft": 0.016654803084006603,
+      "hole_id_in": 8.5,
+      "length_ft": 1000.0,
+      "mu_ea_cp": 78.59967042645954,
+      "name": "S1",
+      "pipe_od_in": 5.0,
+      "re": 1070.470985567167,
+      "re_c1": 1869.503841042186,
+      "re_c2": 2669.5038410421857,
+      "regime": "laminar",
+      "shear_rate": 106.57959183673468,
+      "va_fpm": 155.42857142857142,
+      "va_fps": 2.59047619047619
+     }
+    ],
+    "total_md_ft": 1000.0,
+    "warnings": []
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "frac_emw_ppg": 12.5,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "frac_margin_ok",
+   "result": {
+    "apl_psi": 364.6183614261606,
+    "bhcp_psi": 5358.698361426162,
+    "ecd_ppg": 10.515499139376297,
+    "esd_ppg": 9.8,
+    "frac_emw_ppg": 12.5,
+    "frac_margin_ppg": 1.9845008606237027,
+    "hydrostatic_psi": 4994.080000000001,
+    "inputs": {
+     "flow_rate_gpm": 550.0,
+     "mud_weight_ppg": 9.8,
+     "tvd_ft": 9800.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus)."
+    ],
+    "rheology": {
+     "K": 14.449728467348905,
+     "basis": "fann_100_3",
+     "n": 0.34918164849676164,
+     "readings": {
+      "3": 5.0,
+      "6": 6.0,
+      "100": 17.0,
+      "200": 25.0,
+      "300": 33.0,
+      "600": 52.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 167.5632471853992,
+      "f": 0.010283988825046008,
+      "grad_psi_ft": 0.018213396433195566,
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "mu_ea_cp": 63.20742461323889,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0,
+      "re": 2333.7248229548354,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 158.80912197761512,
+      "va_fpm": 253.76374282673086,
+      "va_fps": 4.229395713778848
+     },
+     {
+      "dp_psi": 30.037005271484063,
+      "f": 0.008768321974493436,
+      "grad_psi_ft": 0.02145500376534576,
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "mu_ea_cp": 55.22915302675479,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0,
+      "re": 2737.125765889377,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 195.39591836734692,
+      "va_fpm": 284.95238095238096,
+      "va_fps": 4.749206349206349
+     },
+     {
+      "dp_psi": 147.29206776696574,
+      "f": 0.009802646367203885,
+      "grad_psi_ft": 0.0173284785608195,
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "mu_ea_cp": 64.11883842998121,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5,
+      "re": 2448.318454116159,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 155.35384615384615,
+      "va_fpm": 258.9230769230769,
+      "va_fps": 4.315384615384615
+     },
+     {
+      "dp_psi": 19.726041202311585,
+      "f": 0.004592529574126235,
+      "grad_psi_ft": 0.07045014715111281,
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "mu_ea_cp": 24.254284150279634,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75,
+      "re": 5517.45245676889,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "turbulent",
+      "shear_rate": 691.893743726999,
+      "va_fpm": 504.5058548009368,
+      "va_fps": 8.408430913348946
+     }
+    ],
+    "total_md_ft": 19380.0,
+    "warnings": []
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "frac_emw_ppg": 10.7,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "frac_near",
+   "result": {
+    "apl_psi": 364.6183614261606,
+    "bhcp_psi": 5358.698361426162,
+    "ecd_ppg": 10.515499139376297,
+    "esd_ppg": 9.8,
+    "frac_emw_ppg": 10.7,
+    "frac_margin_ppg": 0.18450086062370197,
+    "hydrostatic_psi": 4994.080000000001,
+    "inputs": {
+     "flow_rate_gpm": 550.0,
+     "mud_weight_ppg": 9.8,
+     "tvd_ft": 9800.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus)."
+    ],
+    "rheology": {
+     "K": 14.449728467348905,
+     "basis": "fann_100_3",
+     "n": 0.34918164849676164,
+     "readings": {
+      "3": 5.0,
+      "6": 6.0,
+      "100": 17.0,
+      "200": 25.0,
+      "300": 33.0,
+      "600": 52.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 167.5632471853992,
+      "f": 0.010283988825046008,
+      "grad_psi_ft": 0.018213396433195566,
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "mu_ea_cp": 63.20742461323889,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0,
+      "re": 2333.7248229548354,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 158.80912197761512,
+      "va_fpm": 253.76374282673086,
+      "va_fps": 4.229395713778848
+     },
+     {
+      "dp_psi": 30.037005271484063,
+      "f": 0.008768321974493436,
+      "grad_psi_ft": 0.02145500376534576,
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "mu_ea_cp": 55.22915302675479,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0,
+      "re": 2737.125765889377,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 195.39591836734692,
+      "va_fpm": 284.95238095238096,
+      "va_fps": 4.749206349206349
+     },
+     {
+      "dp_psi": 147.29206776696574,
+      "f": 0.009802646367203885,
+      "grad_psi_ft": 0.0173284785608195,
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "mu_ea_cp": 64.11883842998121,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5,
+      "re": 2448.318454116159,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 155.35384615384615,
+      "va_fpm": 258.9230769230769,
+      "va_fps": 4.315384615384615
+     },
+     {
+      "dp_psi": 19.726041202311585,
+      "f": 0.004592529574126235,
+      "grad_psi_ft": 0.07045014715111281,
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "mu_ea_cp": 24.254284150279634,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75,
+      "re": 5517.45245676889,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "turbulent",
+      "shear_rate": 691.893743726999,
+      "va_fpm": 504.5058548009368,
+      "va_fps": 8.408430913348946
+     }
+    ],
+    "total_md_ft": 19380.0,
+    "warnings": [
+     {
+      "code": "ecd_near_frac",
+      "message": "ECD 10.52 ppg is within 0.3 ppg of the fracture gradient 10.70 ppg."
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "frac_emw_ppg": 10.3,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "frac_exceeded",
+   "result": {
+    "apl_psi": 364.6183614261606,
+    "bhcp_psi": 5358.698361426162,
+    "ecd_ppg": 10.515499139376297,
+    "esd_ppg": 9.8,
+    "frac_emw_ppg": 10.3,
+    "frac_margin_ppg": -0.2154991393762966,
+    "hydrostatic_psi": 4994.080000000001,
+    "inputs": {
+     "flow_rate_gpm": 550.0,
+     "mud_weight_ppg": 9.8,
+     "tvd_ft": 9800.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus)."
+    ],
+    "rheology": {
+     "K": 14.449728467348905,
+     "basis": "fann_100_3",
+     "n": 0.34918164849676164,
+     "readings": {
+      "3": 5.0,
+      "6": 6.0,
+      "100": 17.0,
+      "200": 25.0,
+      "300": 33.0,
+      "600": 52.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 167.5632471853992,
+      "f": 0.010283988825046008,
+      "grad_psi_ft": 0.018213396433195566,
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "mu_ea_cp": 63.20742461323889,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0,
+      "re": 2333.7248229548354,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 158.80912197761512,
+      "va_fpm": 253.76374282673086,
+      "va_fps": 4.229395713778848
+     },
+     {
+      "dp_psi": 30.037005271484063,
+      "f": 0.008768321974493436,
+      "grad_psi_ft": 0.02145500376534576,
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "mu_ea_cp": 55.22915302675479,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0,
+      "re": 2737.125765889377,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 195.39591836734692,
+      "va_fpm": 284.95238095238096,
+      "va_fps": 4.749206349206349
+     },
+     {
+      "dp_psi": 147.29206776696574,
+      "f": 0.009802646367203885,
+      "grad_psi_ft": 0.0173284785608195,
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "mu_ea_cp": 64.11883842998121,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5,
+      "re": 2448.318454116159,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 155.35384615384615,
+      "va_fpm": 258.9230769230769,
+      "va_fps": 4.315384615384615
+     },
+     {
+      "dp_psi": 19.726041202311585,
+      "f": 0.004592529574126235,
+      "grad_psi_ft": 0.07045014715111281,
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "mu_ea_cp": 24.254284150279634,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75,
+      "re": 5517.45245676889,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "turbulent",
+      "shear_rate": 691.893743726999,
+      "va_fpm": 504.5058548009368,
+      "va_fps": 8.408430913348946
+     }
+    ],
+    "total_md_ft": 19380.0,
+    "warnings": [
+     {
+      "code": "ecd_over_frac",
+      "message": "ECD 10.52 ppg exceeds the fracture gradient 10.30 ppg by 0.22 ppg. Losses are likely while circulating at this rate."
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "frac_emw_ppg": 9.5,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "esd_over_frac",
+   "result": {
+    "apl_psi": 364.6183614261606,
+    "bhcp_psi": 5358.698361426162,
+    "ecd_ppg": 10.515499139376297,
+    "esd_ppg": 9.8,
+    "frac_emw_ppg": 9.5,
+    "frac_margin_ppg": -1.0154991393762973,
+    "hydrostatic_psi": 4994.080000000001,
+    "inputs": {
+     "flow_rate_gpm": 550.0,
+     "mud_weight_ppg": 9.8,
+     "tvd_ft": 9800.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus)."
+    ],
+    "rheology": {
+     "K": 14.449728467348905,
+     "basis": "fann_100_3",
+     "n": 0.34918164849676164,
+     "readings": {
+      "3": 5.0,
+      "6": 6.0,
+      "100": 17.0,
+      "200": 25.0,
+      "300": 33.0,
+      "600": 52.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 167.5632471853992,
+      "f": 0.010283988825046008,
+      "grad_psi_ft": 0.018213396433195566,
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "mu_ea_cp": 63.20742461323889,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0,
+      "re": 2333.7248229548354,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 158.80912197761512,
+      "va_fpm": 253.76374282673086,
+      "va_fps": 4.229395713778848
+     },
+     {
+      "dp_psi": 30.037005271484063,
+      "f": 0.008768321974493436,
+      "grad_psi_ft": 0.02145500376534576,
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "mu_ea_cp": 55.22915302675479,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0,
+      "re": 2737.125765889377,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 195.39591836734692,
+      "va_fpm": 284.95238095238096,
+      "va_fps": 4.749206349206349
+     },
+     {
+      "dp_psi": 147.29206776696574,
+      "f": 0.009802646367203885,
+      "grad_psi_ft": 0.0173284785608195,
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "mu_ea_cp": 64.11883842998121,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5,
+      "re": 2448.318454116159,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "laminar",
+      "shear_rate": 155.35384615384615,
+      "va_fpm": 258.9230769230769,
+      "va_fps": 4.315384615384615
+     },
+     {
+      "dp_psi": 19.726041202311585,
+      "f": 0.004592529574126235,
+      "grad_psi_ft": 0.07045014715111281,
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "mu_ea_cp": 24.254284150279634,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75,
+      "re": 5517.45245676889,
+      "re_c1": 2991.6211415594366,
+      "re_c2": 3791.6211415594366,
+      "regime": "turbulent",
+      "shear_rate": 691.893743726999,
+      "va_fpm": 504.5058548009368,
+      "va_fps": 8.408430913348946
+     }
+    ],
+    "total_md_ft": 19380.0,
+    "warnings": [
+     {
+      "code": "esd_over_frac",
+      "message": "Static mud weight (ESD) 9.80 ppg is at or above the fracture gradient 9.50 ppg. Losses are expected even with the pumps off."
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 500,
+    "mud_weight_ppg": 12.0,
+    "rheology": {
+     "fann": {
+      "100": 10,
+      "3": 2,
+      "300": 18,
+      "600": 30
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 6.276,
+      "length_ft": 9000,
+      "name": "S1",
+      "pipe_od_in": 5.0
+     }
+    ],
+    "tvd_ft": 6000
+   },
+   "name": "ecd_large_rise",
+   "result": {
+    "apl_psi": 2492.7236079172562,
+    "bhcp_psi": 6236.723607917256,
+    "ecd_ppg": 19.98949874332454,
+    "esd_ppg": 12.0,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 3744.0,
+    "inputs": {
+     "flow_rate_gpm": 500.0,
+     "mud_weight_ppg": 12.0,
+     "tvd_ft": 6000.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus)."
+    ],
+    "rheology": {
+     "K": 4.829612720675571,
+     "basis": "fann_100_3",
+     "n": 0.4592232928487644,
+     "readings": {
+      "3": 2.0,
+      "100": 10.0,
+      "300": 18.0,
+      "600": 30.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 2492.7236079172562,
+      "f": 0.0037812918492472684,
+      "grad_psi_ft": 0.27696928976858404,
+      "hole_id_in": 6.276,
+      "length_ft": 9000.0,
+      "mu_ea_cp": 10.40467353739849,
+      "name": "S1",
+      "pipe_od_in": 5.0,
+      "re": 19363.143516379743,
+      "re_c1": 2840.864088797193,
+      "re_c2": 3640.864088797193,
+      "regime": "turbulent",
+      "shear_rate": 1600.0599084739945,
+      "va_fpm": 850.6985180053402,
+      "va_fps": 14.178308633422338
+     }
+    ],
+    "total_md_ft": 9000.0,
+    "warnings": [
+     {
+      "code": "ecd_large_rise",
+      "message": "Annular friction adds 7.99 ppg to the mud weight, more than 2 ppg. That is unusual for a drilling annulus; check the flow rate and the annulus sizes."
+     }
+    ]
+   }
+  },
+  {
+   "input": {
+    "flow_rate_gpm": 900,
+    "mud_weight_ppg": 16.0,
+    "rheology": {
+     "fann": {
+      "100": 25,
+      "3": 6,
+      "300": 55,
+      "600": 90
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 6.276,
+      "length_ft": 30000,
+      "name": "S1",
+      "pipe_od_in": 5.0
+     }
+    ],
+    "tvd_ft": 30000
+   },
+   "name": "ecd_implausible",
+   "result": {
+    "apl_psi": 28944.991510481505,
+    "bhcp_psi": 53904.9915104815,
+    "ecd_ppg": 34.554481737488146,
+    "esd_ppg": 16.0,
+    "frac_emw_ppg": null,
+    "frac_margin_ppg": null,
+    "hydrostatic_psi": 24960.0,
+    "inputs": {
+     "flow_rate_gpm": 900.0,
+     "mud_weight_ppg": 16.0,
+     "tvd_ft": 30000.0
+    },
+    "notes": [
+     "Annular n and K from 100 and 3 rpm readings (API RP 13D 1995 annulus)."
+    ],
+    "rheology": {
+     "K": 15.772897057468414,
+     "basis": "fann_100_3",
+     "n": 0.40720121419547484,
+     "readings": {
+      "3": 6.0,
+      "100": 25.0,
+      "300": 55.0,
+      "600": 90.0
+     },
+     "source": "fann"
+    },
+    "sections": [
+     {
+      "dp_psi": 28944.991510481505,
+      "f": 0.0030491374788996846,
+      "grad_psi_ft": 0.9648330503493835,
+      "hole_id_in": 6.276,
+      "length_ft": 30000.0,
+      "mu_ea_cp": 16.4868116026109,
+      "name": "S1",
+      "pipe_od_in": 5.0,
+      "re": 29327.75968600074,
+      "re_c1": 2912.1343365521993,
+      "re_c2": 3712.1343365521993,
+      "regime": "turbulent",
+      "shear_rate": 2880.10783525319,
+      "va_fpm": 1531.2573324096124,
+      "va_fps": 25.52095554016021
+     }
+    ],
+    "total_md_ft": 30000.0,
+    "warnings": [
+     {
+      "code": "ecd_implausible",
+      "message": "ECD of 34.55 ppg is above 25 ppg, heavier than any drilling fluid in use. Check the flow rate, the hole and pipe sizes, and the rheology."
+     }
+    ]
+   }
+  },
+  {
+   "error": "Fracture gradient must be above 0 and at most 30 ppg EMW.",
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "frac_emw_ppg": 0,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "err_frac_zero"
+  },
+  {
+   "error": "Fracture gradient must be a number, got 'abc'.",
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "frac_emw_ppg": "abc",
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "err_frac_text"
+  },
+  {
+   "error": "Section 1: pipe OD (5 in) must be smaller than hole/casing ID (5 in).",
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 5,
+      "length_ft": 100,
+      "name": "x",
+      "pipe_od_in": 5
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "err_pipe_ge_hole"
+  },
+  {
+   "error": "Mud weight must be greater than 0 ppg.",
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "mud_weight_ppg": -1,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "err_negative_mw"
+  },
+  {
+   "error": "Flow rate cannot be negative.",
+   "input": {
+    "flow_rate_gpm": -10,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "err_negative_q"
+  },
+  {
+   "error": "Section 1 length cannot be negative.",
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.5,
+      "length_ft": -1,
+      "name": "x",
+      "pipe_od_in": 5
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "err_negative_length"
+  },
+  {
+   "error": "Dial readings must not increase as speed drops: 300 rpm (40) > 600 rpm (30).",
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "300": 40,
+      "600": 30
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "err_bad_dials"
+  },
+  {
+   "error": "Flow rate 1e-300 gpm is too small to evaluate. Use 0 for no flow.",
+   "input": {
+    "flow_rate_gpm": 1e-300,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 17,
+      "200": 25,
+      "3": 5,
+      "300": 33,
+      "6": 6,
+      "600": 52
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "err_tiny_flow"
+  },
+  {
+   "error": "Flow behavior index n = 201.042 is outside the range this model handles (n <= 2). Check the readings.",
+   "input": {
+    "flow_rate_gpm": 550.0,
+    "mud_weight_ppg": 9.8,
+    "rheology": {
+     "fann": {
+      "100": 1e+306,
+      "3": 1,
+      "300": 1e+307,
+      "600": 1e+308
+     }
+    },
+    "sections": [
+     {
+      "hole_id_in": 8.835,
+      "length_ft": 9200.0,
+      "name": "Casing 8.835 in ID x 5 in DP",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 1400.0,
+      "name": "Open hole 8.5 in x 5 in DP (curve)",
+      "pipe_od_in": 5.0
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 8500.0,
+      "name": "Open hole 8.5 in x 4.5 in DP (lateral)",
+      "pipe_od_in": 4.5
+     },
+     {
+      "hole_id_in": 8.5,
+      "length_ft": 280.0,
+      "name": "Open hole 8.5 in x 6.75 in BHA",
+      "pipe_od_in": 6.75
+     }
+    ],
+    "tvd_ft": 9800.0
+   },
+   "name": "err_huge_dials"
+  }
+ ],
+ "generator": "tests/make_vectors.py",
+ "parse": [
+  {
+   "name": "header_csv",
+   "rows": [
+    {
+     "hole_id_in": 8.835,
+     "length_ft": 9200.0,
+     "name": "Casing",
+     "pipe_od_in": 5.0
+    },
+    {
+     "hole_id_in": 8.5,
+     "length_ft": 8500.0,
+     "name": "OH",
+     "pipe_od_in": 4.5
+    }
+   ],
+   "text": "name,hole_id_in,pipe_od_in,length_ft\nCasing,8.835,5,9200\nOH,8.5,4.5,8500\n"
+  },
+  {
+   "name": "tabs_extra_cols_blank_lines",
+   "rows": [
+    {
+     "hole_id_in": 8.5,
+     "length_ft": 1000.0,
+     "name": "A",
+     "pipe_od_in": 5.0
+    },
+    {
+     "hole_id_in": 8.5,
+     "length_ft": 200.0,
+     "name": "B",
+     "pipe_od_in": 6.75
+    }
+   ],
+   "text": "Section\tHole ID\tPipe OD\tLength\tNote\n\nA\t8.5\t5\t1000\tx\r\n\nB\t8.5\t6.75\t200\ty\n"
+  },
+  {
+   "name": "no_header_three_cols",
+   "rows": [
+    {
+     "hole_id_in": 8.5,
+     "length_ft": 1000.0,
+     "name": "Section 1",
+     "pipe_od_in": 5.0
+    },
+    {
+     "hole_id_in": 8.5,
+     "length_ft": 500.0,
+     "name": "Section 2",
+     "pipe_od_in": 4.5
+    }
+   ],
+   "text": "8.5,5,1000\n8.5,4.5,500\n"
+  },
+  {
+   "error": "Line 1: hole/casing ID '9-5/8' is not a number.",
+   "name": "err_quoted_comma_unsupported",
+   "text": "\"Casing, 9-5/8\",8.835,5,9200\n"
+  },
+  {
+   "name": "comment_lines",
+   "rows": [
+    {
+     "hole_id_in": 8.5,
+     "length_ft": 100.0,
+     "name": "A",
+     "pipe_od_in": 5.0
+    }
+   ],
+   "text": "# geometry\nname,hole,pipe,length\nA,8.5,5,100\n"
+  },
+  {
+   "error": "Line 2: pipe OD 'abc' is not a number.",
+   "name": "err_bad_number",
+   "text": "name,hole,pipe,length\nA,8.5,abc,100\n"
+  },
+  {
+   "error": "Line 2: pipe OD 'NaN' is not a number.",
+   "name": "err_nan",
+   "text": "name,hole,pipe,length\nA,8.5,NaN,100\n"
+  },
+  {
+   "error": "Line 1 is neither a header row (name, hole_id_in, pipe_od_in, length_ft) nor a data row with numbers for hole ID, pipe OD and length: \"foo,bar\".",
+   "name": "err_bad_header",
+   "text": "foo,bar\n1,2\n"
+  },
+  {
+   "error": "Section file is empty.",
+   "name": "err_empty",
+   "text": "\n\n"
+  },
+  {
+   "error": "Section file has a header but no data rows.",
+   "name": "err_header_only",
+   "text": "name,hole,pipe,length\n"
+  },
+  {
+   "name": "bom_no_header",
+   "rows": [
+    {
+     "hole_id_in": 8.5,
+     "length_ft": 100.0,
+     "name": "Section 1",
+     "pipe_od_in": 5.0
+    }
+   ],
+   "text": "\ufeff8.5,5,100\n"
+  }
+ ]
+}
